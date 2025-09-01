@@ -6,6 +6,8 @@ This project lets you change the color of any folder in Windows via the right-cl
 Easily change the color of any folder in Windows via the right-click context menu.  
 This project uses **Registry entries** + a **PowerShell script** to set custom folder icons with one click.
 
+Note: The `.icl` file used in this Project is Not Made by me, i only made the codes.
+[`.icl` Source](https://www.deviantart.com/abs96/art/Windows-11-coloured-folder-icons-896431403)
 ---
 
 ## ✨ Features
@@ -19,6 +21,6 @@ This project uses **Registry entries** + a **PowerShell script** to set custom f
 
 ## 📦 Installation
 
-1. Clone or download this repository:
-   ```bash
-   git clone https://github.com/YourUsername/FolderColors.git
+1. Clone or download this repository
+2. Place it Wherever you want
+3. copy your .icl
