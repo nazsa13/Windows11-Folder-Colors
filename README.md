@@ -31,7 +31,7 @@ This project uses **Registry entries** + a **PowerShell script** to set custom f
 6. Now Firstly, replace the phrase `iclPath` with the same path you copied in step 3. 
 7. Now copy the path of `Set-FolderIcon.ps1` and replace the phrase `ps1Path` with it. 
 8. Now copy the path of `MenuIcon.ico` and replace the Phrase `MIconPath` with it. 
-9. Now run `Install-FolderColors.reg` once and now you can just right-click any folder to color it.
+9. Now copy the content from text replacer and paste it again in `Install-FolderColors.reg` then run it once, now you can just right-click any folder to color it.
 10. In case you want to Uninstall it you can just run `Uninstall-FolderColors.reg` once.
 11. Note that when changing the Folder Color it takes up to 2 mins to update.
 12. Have Fun!!
