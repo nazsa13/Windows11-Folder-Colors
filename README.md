@@ -27,9 +27,9 @@ This project uses **Registry entries** + a **PowerShell script** to set custom f
 2. Place it and Extract it Wherever you want (keep it in the same place forever).
 3. copy your `.icl` Path and open `Set-FolderIcon.ps1`, Paste the path in its place (10th line).
 4. Open `Install-FolderColors.reg` with Notepad and copy the whole thing then go to [Text Replacer](https://www.browserling.com/tools/text-replace) and Paste it There.
-5. Now Firstly, replace the phrase `iclPath` with the same path you copied in step 3.
-6. Now copy the path of `Set-FolderIcon.ps1` and replace the phrase `ps1Path` with it.
-7. Now copy the path of `MenuIcon.ico` and replace the Phrase `MIconPath` with it.
+5. Now Firstly, replace the phrase `iclPath` with the same path you copied in step 3. **(Make sure to paste the path without parameters (`"`))**
+6. Now copy the path of `Set-FolderIcon.ps1` and replace the phrase `ps1Path` with it. **(Make sure to paste the path without parameters (`"`))**
+7. Now copy the path of `MenuIcon.ico` and replace the Phrase `MIconPath` with it. **(Make sure to paste the path without parameters (`"`))**
 8. Now run `Install-FolderColors.reg` once and now you can just right-click any folder to color it.
 9. In case you want to Uninstall it you can just run `Uninstall-FolderColors.reg` once.
 10. Note that when changing the Folder Color it takes up to 2 mins to update.
