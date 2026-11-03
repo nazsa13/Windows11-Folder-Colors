@@ -1,0 +1,10 @@
+# Build outputs
+launcher/out/
+dist/
+FoldersColors/FolderColors.exe
+
+# Workspace metadata / local leftovers
+.freebuff/
+FoldersColors/desktop.ini
+FoldersColors/New folder/
+*.log

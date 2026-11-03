@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Windows 11 Folder Colors — Free Download</title>
+<style>
+  :root { --accent:#0a84ff; --bg:#f6f7f9; --card:#fff; --text:#1c1e21; --muted:#5a6472; --warn-bg:#fff7e6; --warn-border:#f0b429; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:"Segoe UI",system-ui,-apple-system,sans-serif; background:var(--bg); color:var(--text); line-height:1.6; }
+  .wrap { max-width:880px; margin:0 auto; padding:32px 20px 80px; }
+  header { text-align:center; padding:28px 0 30px; }
+  h1 { font-size:2.1rem; margin-bottom:6px; }
+  .tagline { color:var(--muted); font-size:1.05rem; max-width:640px; margin:0 auto; }
+  .badge { display:inline-block; background:#e2f3e8; color:#1c7a3d; font-size:.8rem; font-weight:600; border-radius:999px; padding:3px 12px; margin-top:10px; }
+  .download-card { background:linear-gradient(180deg,#fff,#f0f6ff); border:1px solid #d7e3f4; border-radius:14px; padding:26px; text-align:center; margin:24px 0; }
+  .btn { display:inline-block; background:var(--accent); color:#fff; text-decoration:none; font-weight:600; font-size:1.05rem; padding:14px 34px; border-radius:10px; box-shadow:0 3px 10px rgba(10,132,255,.35); }
+  .btn:hover { background:#0873d8; }
+  .download-card .meta { color:var(--muted); font-size:.9rem; margin-top:12px; }
+  h2 { font-size:1.35rem; margin:34px 0 12px; border-bottom:2px solid #e6e9ee; padding-bottom:6px; }
+  .card { background:var(--card); border:1px solid #e6e9ee; border-radius:12px; padding:18px 22px; margin-bottom:14px; }
+  ol, ul { padding-left:24px; }
+  li { margin:6px 0; }
+  pre, .menutree { background:#1e2430; color:#d7e3f2; border-radius:10px; padding:14px 18px; font-family:Consolas,Menlo,monospace; font-size:.9rem; overflow-x:auto; margin:10px 0; }
+  .menutree { line-height:1.7; }
+  .warn { background:var(--warn-bg); border-left:4px solid var(--warn-border); border-radius:8px; padding:14px 18px; margin:14px 0; }
+  table { width:100%; border-collapse:collapse; font-size:.92rem; margin:10px 0; }
+  th, td { border:1px solid #e6e9ee; padding:8px 10px; text-align:left; vertical-align:top; }
+  th { background:#eef2f7; }
+  footer { text-align:center; color:var(--muted); font-size:.85rem; margin-top:50px; }
+  .step-num { display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px; background:var(--accent); color:#fff; border-radius:50%; font-weight:700; margin-right:8px; }
+  .step { display:flex; align-items:flex-start; margin:16px 0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>Windows 11 Folder Colors</h1>
+    <p class="tagline">Right-click any folder → <b>Set Folder Color</b> → pick one of 20 colored icons, or <b>Reset to Default</b>. Runs fully hidden — no console windows, no popups, no installer UI.</p>
+    <span class="badge">✓ per-user · no admin rights · no execution-policy changes</span>
+  </header>
+
+  <div class="download-card">
+    <a class="btn" href="https://github.com/nazsa13/Windows11-Folder-Colors/releases/latest/download/FolderColors-v3.1.zip" download>⬇ Download FolderColors.zip</a>
+    <div class="meta">Latest release · v3.1 · ~350 KB · extracts to <b>FolderColors\</b> · install = one double-click</div>
+  </div>
+
+  <h2>What you get</h2>
+  <div class="card">
+    <div class="menutree">
+      Right-click any folder<br>
+      ├─ 20 colors (Dark Grey → Maroon, each with its real icon in the menu)<br>
+      └─ <b>Reset to Default</b> — removes the folder's desktop.ini, restores the yellow icon
+    </div>
+    <ul>
+      <li>Everything lives in the <b>classic full right-click menu</b>, directly on the first click (the installer enables the classic-menu toggle for you).</li>
+      <li>Windows 11's compact right-click menu cannot host registry menu entries at all — that is a Windows limitation, not a tool one.</li>
+    </ul>
+  </div>
+
+  <h2>How to set it up (2 minutes)</h2>
+  <div class="card">
+    <div class="step"><span class="step-num">1</span><div><b>Download and extract</b> the zip anywhere local — e.g. <code>C:\Tools\FolderColors\</code>. You can delete or move the extracted folder later (see the warning below).</div></div>
+    <div class="step"><span class="step-num">2</span><div><b>Double-click <code>install.cmd</code></b> inside the extracted <code>FolderColors\</code> folder. A console shows the progress and pauses at the end. No admin prompt — everything installs per-user to <code>%LOCALAPPDATA%\Programs\FolderColors</code> and the menu is registered immediately.</div></div>
+    <div class="step"><span class="step-num">3</span><div><b>Right-click a folder → Set Folder Color → pick a color.</b> If the entry isn't there on the first right-click, restart File Explorer once (Task Manager → Windows Explorer → Restart) and it will be.</div></div>
+  </div>
+
+  <h2>How it works</h2>
+  <div class="card">
+<pre>Explorer right-click
+  → registry submenu (HKCU\...\Directory\shell\FolderColorMenu, 21 items)
+      → FolderColors.exe --run color "&lt;folder&gt;" &lt;index&gt;    (hidden native runner)
+          → Run-MenuAction.ps1 (hidden PowerShell worker)
+              → writes &lt;folder&gt;\desktop.ini  (IconResource =&lt;stable icon library&gt;)
+                  → SHChangeNotify() → Explorer refreshes the icon</pre>
+    <ul>
+      <li><b>No console flash:</b> the registry points at a small native exe that spawns PowerShell with window creation disabled — nothing is ever visible.</li>
+      <li><b>No rundll32:</b> older builds popped "Error in shell32.dll — Missing entry: SHChangeNotify_RunDLL" on recent Windows builds; all notify paths now call the shell API directly.</li>
+    </ul>
+  </div>
+
+  <div class="warn">
+    <b>⚠ Moving files after setup — read this once.</b><br>
+    Each colored folder's <code>desktop.ini</code> stores an <b>absolute path</b> to the icon library.
+    The installed library (<code>%LOCALAPPDATA%\Programs\FolderColors</code>) must never be moved or synced.
+    The <em>extracted download folder</em> is only a staging copy — moving or deleting it after installing is safe,
+    because the installed copy is what actually runs. If you ever break icons anyway (renamed library, moved profile, etc.),
+    either run <code>Repair-FolderColors.ps1 -Apply</code> or simply re-run the installer — it repairs broken paths automatically on every run.
+  </div>
+
+  <h2>Is it actually working? (the runner is silent on purpose)</h2>
+  <div class="card">
+    <ul>
+      <li><b>Logs:</b> every action writes a line to <code>%LOCALAPPDATA%\Programs\FolderColors\app\Logs\menu-action-&lt;date&gt;.log</code>, e.g. <code>[20:56:22] applied index 3 to C:\...\MyFolder</code>. Log lines appearing = the runner is working.</li>
+      <li><b>desktop.ini:</b> <code>Get-Item "&lt;colored folder&gt;\desktop.ini" -Force</code> shows the icon path.</li>
+      <li><b>Timing:</b> the color is applied instantly, but Explorer often shows it a few seconds later (it refreshes icons on its own schedule). F5 inside the folder or restarting Explorer flushes it immediately.</li>
+    </ul>
+  </div>
+
+  <h2>Uninstall</h2>
+  <div class="card">
+    <pre>powershell -ExecutionPolicy Bypass -File "%LOCALAPPDATA%\Programs\FolderColors\ps1\Uninstall-FolderColors.ps1"</pre>
+    Removes all menu keys and the installed folder. Folders you already colored keep their desktop.ini until you reset them — run <b>Reset to Default</b> before uninstalling if you want them clean.
+  </div>
+
+  <h2>Troubleshooting (quick view)</h2>
+  <div class="card">
+    <table>
+      <tr><th>Symptom</th><th>Fix</th></tr>
+      <tr><td>Menu missing entirely</td><td>Restart Explorer; re-run <code>install.cmd</code>.</td></tr>
+      <tr><td>Entry only under “Show more options”</td><td>Classic menu toggle not set — reinstall (<code>install.cmd</code> sets it) or restore it manually.</td></tr>
+      <tr><td>Color doesn't appear</td><td>Wait a few seconds / F5 / restart Explorer. If still nothing, check the library exists at the installed path and look at the log.</td></tr>
+      <tr><td>“Error in shell32.dll / Missing entry” popup</td><td>You're running an old copy. Delete it and reinstall — current build has no rundll32 usage.</td></tr>
+      <tr><td>Antivirus quarantines <code>FolderColors.exe</code></td><td>False positive on an unsigned self-built exe. Add exclusions for <code>%LOCALAPPDATA%\Programs\FolderColors</code>, restore the file, done.</td></tr>
+    </table>
+  </div>
+
+  <footer>
+    Source code and full documentation: <a href="https://github.com/nazsa13/Windows11-Folder-Colors">GitHub repository</a> · Note: Explorer's icon cache may delay color changes by a few seconds
+  </footer>
+
+</div>
+</body>
+</html>
