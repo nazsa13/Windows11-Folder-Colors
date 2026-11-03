@@ -4,7 +4,7 @@ Adds a **`Set Folder Color`** submenu to the right-click menu of any folder in W
 
 Works fully in the background — no console flashes, no GUI popups, no installer windows. Menu-only by design.
 
-![Showcase](Showcase.png)
+![All 20 folder colors in one right-click menu](docs/og-image.png)
 
 **Note: The `.icl` file used in this Project is Not Made by me, i only made the codes.**
 ([.icl Source](https://www.deviantart.com/abs96/art/Windows-11-coloured-folder-icons-896431403))
@@ -102,7 +102,7 @@ HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer3
 | `launcher/AppLauncher.cs` + `launcher/versioninfo.cs` | Runner source (C#, compiled with the in-box .NET 4 compiler). |
 | `launcher/Run-MenuAction.ps1` | Worker source (copied to the app dir on install). |
 | `launcher/build.cmd` | Rebuilds `FolderColors.exe` → `launcher/out/`. |
-| `Showcase.png`, `README.md` | Docs. |
+| `docs/og-image.png`, `docs/favicon.ico`, `README.md` | Docs and the release banner/favicon. The banner shows all 20 real library icons. |
 | `%LOCALAPPDATA%\Programs\FolderColors\` | The **installed** copy (this is what actually runs; registry points here). |
 
 ## 5. Install on a NEW device

@@ -9,7 +9,19 @@
 <meta name="keywords" content="color folders windows 11, change folder color windows 11, colored folder icons windows 11, folder color app, right click folder color, free folder colorizer">
 <link rel="canonical" href="https://windows11-folder-colors.vercel.app/">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
-<meta name="theme-color" content="#141433">
+<meta name="theme-color" content="#f7f9fb">
+<link rel="icon" href="favicon.ico">
+<script>
+(function(){
+  try {
+    var t = localStorage.getItem("fc-theme");
+    if (t) { document.documentElement.setAttribute("data-theme", t); }
+    else if (window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches) {
+      document.documentElement.setAttribute("data-theme", "dark");
+    }
+  } catch (e) {}
+})();
+</script>
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
@@ -121,83 +133,106 @@
 
 <style>
   :root {
-    --blue:#2f6df6; --green:#2ecc71; --yellow:#f1c40f; --orange:#e67e22;
-    --red:#e74c3c; --purple:#8e2de2; --pink:#ec4899; --teal:#00c9a7;
-    --ink:#20223b; --muted:#5d6478; --bg:#fafbff; --card:#ffffff;
-    --line:#e4e6f2;
+    --bg:#f7f9fb; --card:#ffffff; --ink:#1d2733; --muted:#5d6b7a; --line:#e2e8ee;
+    --thbg:#eef4f8; --code-bg:#1d2333; --code-fg:#d7e3f2; --link:#1565c0;
+    --c1:#5f6673; --c2:#e67e22; --c3:#2e8b32; --c4:#1565c0; --c5:#ec407a;
+    --shadow:0 2px 8px rgba(29,39,51,.08);
+    --rainbow:linear-gradient(90deg,#5f6673,#c62b28,#e67e22,#fdd835,#7cc400,#2e8b32,#009688,#4fc3f7,#1565c0,#37a9e6,#8e2de2,#ec407a,#9b2335);
+  }
+  [data-theme="dark"] {
+    --bg:#0e1319; --card:#161d27; --ink:#e8eef5; --muted:#96a4b5; --line:#263140;
+    --thbg:#1c2432; --code-bg:#0b1017; --code-fg:#c9d7e6; --link:#79c0ff;
+    --c1:#8a9199; --c2:#f5a623; --c3:#48c9b0; --c4:#4fc3f7; --c5:#f2799f;
+    --shadow:0 2px 8px rgba(0,0,0,.45);
   }
   * { box-sizing:border-box; margin:0; padding:0; }
   body {
     font-family:"Segoe UI",system-ui,-apple-system,sans-serif;
     background:var(--bg); color:var(--ink); line-height:1.6;
+    transition:background .25s, color .25s;
   }
+  a { color:var(--link); }
+
   /* ---------- colorful header ---------- */
   .hero {
     background:
-      radial-gradient(900px 340px at 12% -30%, rgba(142,45,226,.28), transparent 60%),
-      radial-gradient(900px 340px at 88% -30%, rgba(47,109,246,.35), transparent 60%),
-      linear-gradient(160deg, #141433 0%, #241a4a 55%, #33206b 100%);
-    color:#fff; padding:8px 0 0;
+      radial-gradient(900px 380px at 10% -20%, rgba(0,201,167,.10), transparent 60%),
+      radial-gradient(900px 380px at 90% -20%, rgba(236,64,122,.09), transparent 60%),
+      var(--bg);
+    padding:0 0 10px; position:relative;
+    border-bottom:4px solid;
+    border-image:linear-gradient(90deg,#c62b28,#e67e22,#fdd835,#2e8b32,#009688,#1565c0,#8e2de2,#ec407a) 1 / 4px;
   }
   .hero-img-chips { display:flex; gap:6px; justify-content:center; flex-wrap:wrap; padding-top:22px; }
-  .hero-img-chips span { width:26px; height:20px; border-radius:5px 5px 3px 3px; box-shadow:0 2px 6px rgba(0,0,0,.35); }
+  .hero-img-chips span { width:26px; height:20px; border-radius:5px 5px 3px 3px; box-shadow:0 2px 6px rgba(0,0,0,.28); }
   .wrap { max-width:920px; margin:0 auto; padding:0 20px 80px; }
-  header.hero-inner { text-align:center; padding:18px 0 34px; }
+  header.hero-inner { text-align:center; padding:18px 0 6px; }
   h1 { font-size:clamp(1.7rem, 4.5vw, 2.4rem); margin-bottom:10px; line-height:1.25; }
-  h1 .accent { background:linear-gradient(90deg,#7ec8ff,#b388ff,#ff8ad0); -webkit-background-clip:text; background-clip:text; color:transparent; }
-  .tagline { color:#c9cdea; font-size:1.06rem; max-width:700px; margin:0 auto; }
+  h1 .accent { background:var(--rainbow); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .tagline { color:var(--muted); font-size:1.06rem; max-width:700px; margin:0 auto; }
   .badges { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-top:16px; }
-  .badge { background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.22); color:#e8ebff; font-size:.78rem; font-weight:600; border-radius:999px; padding:5px 13px; }
+  .badge { background:var(--card); border:1px solid var(--line); color:var(--ink); font-size:.78rem; font-weight:600; border-radius:999px; padding:5px 13px; }
   nav.site { text-align:center; padding:12px 0 0; font-size:.9rem; }
-  nav.site a { color:#cfd6ffb3; text-decoration:none; margin:0 7px; }
-  nav.site a:hover { color:#fff; text-decoration:underline; }
-
-  /* ---------- download card ---------- */
-  .download-card {
-    background:linear-gradient(120deg,#2f6df6 0%, #7b3ff2 55%, #b62ee6 100%);
-    border-radius:18px; padding:30px 24px; text-align:center; margin:-30px auto 10px; max-width:760px;
-    box-shadow:0 16px 40px rgba(47,60,246,.35); color:#fff;
+  nav.site a { color:var(--muted); text-decoration:none; margin:0 7px; }
+  nav.site a:hover { color:var(--ink); text-decoration:underline; }
+  .theme-toggle {
+    position:absolute; top:16px; right:18px; z-index:5;
+    border:1px solid var(--line); background:var(--card); color:var(--ink);
+    border-radius:999px; padding:7px 13px; cursor:pointer; font-size:.9rem; line-height:1;
   }
-  .btn { display:inline-block; background:#fff; color:#241a4a; text-decoration:none; font-weight:700; font-size:1.05rem; padding:14px 36px; border-radius:12px; box-shadow:0 4px 14px rgba(0,0,0,.25); transition:transform .12s; }
+  .theme-toggle:hover { border-color:var(--link); }
+  .hero-banner { max-width:780px; margin:28px auto 0; padding:0 12px; }
+  .hero-banner img { display:block; width:100%; height:auto; border-radius:16px; border:1px solid var(--line); box-shadow:0 16px 44px rgba(15,20,26,.30); }
+
+  /* ---------- download card (rainbow frame) ---------- */
+  .download-card {
+    background:var(--rainbow); padding:5px; border-radius:18px; max-width:780px;
+    margin:-34px auto 12px; box-shadow:0 16px 40px rgba(15,20,26,.28);
+  }
+  .dl-wrap { background:var(--card); border-radius:14px; padding:28px 24px; text-align:center; }
+  .btn {
+    display:inline-block; background:var(--rainbow); color:#fff; text-decoration:none; font-weight:700;
+    font-size:1.05rem; padding:14px 36px; border-radius:12px; text-shadow:0 1px 2px rgba(0,0,0,.3);
+    transition:transform .12s;
+  }
   .btn:hover { transform:translateY(-2px); }
-  .download-card .meta { color:#e4e0ff; font-size:.9rem; margin-top:12px; }
-  .download-card .meta a { color:#ffe08a; }
+  .download-card .meta { color:var(--muted); font-size:.9rem; margin-top:12px; }
 
   /* ---------- stats ---------- */
   .stats { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:26px 0 6px; }
   .stat { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:12px 18px; text-align:center; min-width:118px; }
   .stat b { display:block; font-size:1.35rem; }
   .stat span { color:var(--muted); font-size:.8rem; }
-  .stat:nth-child(1) b { color:var(--purple); }
-  .stat:nth-child(2) b { color:var(--orange); }
-  .stat:nth-child(3) b { color:var(--green); }
-  .stat:nth-child(4) b { color:var(--blue); }
-  .stat:nth-child(5) b { color:var(--pink); }
+  .stat:nth-child(1) b { color:var(--c1); }
+  .stat:nth-child(2) b { color:var(--c2); }
+  .stat:nth-child(3) b { color:var(--c3); }
+  .stat:nth-child(4) b { color:var(--c4); }
+  .stat:nth-child(5) b { color:var(--c5); }
 
   /* ---------- sections ---------- */
   h2 { font-size:1.4rem; margin:44px 0 14px; display:flex; align-items:center; gap:10px; }
-  h2::before { content:""; width:10px; height:26px; border-radius:6px; background:linear-gradient(180deg,var(--purple),var(--pink),var(--orange)); flex-shrink:0; }
-  .card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:20px 24px; margin-bottom:14px; box-shadow:0 2px 8px rgba(40,40,90,.05); }
+  h2::before { content:""; width:10px; height:26px; border-radius:6px; background:var(--rainbow); flex-shrink:0; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:20px 24px; margin-bottom:14px; box-shadow:var(--shadow); }
   ul, ol { padding-left:24px; }
   li { margin:6px 0; }
-  pre { background:#1d2135; color:#d7e3f2; border-radius:10px; padding:14px 18px; font-family:Consolas,Menlo,monospace; font-size:.9rem; overflow-x:auto; margin:10px 0; }
-  .answer-first { background:linear-gradient(120deg,#eef4ff,#f7efff); border-left:5px solid var(--purple); border-radius:10px; padding:15px 20px; margin:24px 0 8px; }
-  .warn { background:#fff7e6; border-left:5px solid var(--yellow); border-radius:10px; padding:14px 18px; margin:14px 0; }
+  pre { background:var(--code-bg); color:var(--code-fg); border-radius:10px; padding:14px 18px; font-family:Consolas,Menlo,monospace; font-size:.9rem; overflow-x:auto; margin:10px 0; }
+  .answer-first { background:rgba(0,201,167,.07); border-left:5px solid #009688; border-radius:10px; padding:15px 20px; margin:24px 0 8px; }
+  .warn { background:rgba(241,196,15,.10); border-left:5px solid #f1c40f; border-radius:10px; padding:14px 18px; margin:14px 0; }
   table { width:100%; border-collapse:collapse; font-size:.92rem; margin:10px 0; }
   th, td { border:1px solid var(--line); padding:8px 10px; text-align:left; vertical-align:top; }
-  th { background:#eef2ff; }
+  th { background:var(--thbg); }
   footer { text-align:center; color:var(--muted); font-size:.85rem; margin-top:50px; }
   .step { display:flex; align-items:flex-start; margin:16px 0; }
   .step-num { display:inline-flex; align-items:center; justify-content:center; width:30px; height:30px; color:#fff; border-radius:50%; font-weight:700; margin-right:12px; flex-shrink:0; }
-  .step:nth-child(1) .step-num { background:var(--purple); }
-  .step:nth-child(2) .step-num { background:var(--blue); }
-  .step:nth-child(3) .step-num { background:var(--green); }
+  .step:nth-child(1) .step-num { background:var(--c2); }
+  .step:nth-child(2) .step-num { background:var(--c4); }
+  .step:nth-child(3) .step-num { background:var(--c3); }
 
   /* ---------- gallery ---------- */
   .figure { text-align:center; }
-  .figure img { border-radius:12px; box-shadow:0 4px 18px rgba(30,30,80,.14); }
+  .figure img { border-radius:12px; box-shadow:0 4px 18px rgba(15,20,26,.14); }
   .shot { max-width:520px; width:100%; border:1px solid var(--line); }
-  .lib { max-width:100%; border:1px solid var(--line); }
+  .lib { max-width:100%; border:1px solid var(--line); background:#fff; }
   .gallery { display:grid; grid-template-columns:1fr; gap:14px; }
   @media (min-width:760px) { .gallery { grid-template-columns:1fr 1fr; align-items:center; } .shot { max-width:100%; } }
   .figcap { color:var(--muted); font-size:.84rem; margin-top:8px; }
@@ -218,6 +253,7 @@
     <span style="background:#9b2335"></span><span style="background:#f5f6f8"></span><span style="background:#fdd835"></span>
     <span style="background:#009688"></span><span style="background:#16255f"></span>
   </div>
+  <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch light/dark theme" title="Switch light/dark theme">🌒</button>
   <header class="hero-inner">
     <nav class="site" aria-label="Page sections" style="order:2">
       <a href="#download">Download</a>·
@@ -236,6 +272,10 @@
       <span class="badge">✓ no execution-policy changes</span>
       <span class="badge">✓ works offline</span>
     </div>
+    <figure class="hero-banner">
+      <img src="og-image.png" width="1200" height="630"
+           alt="Folder Colors banner: rows of 20 real colored Windows folder icons on a dark backdrop, one double-click install, no admin rights">
+    </figure>
   </header>
 </div>
 
@@ -243,8 +283,10 @@
 
   <main>
   <div class="download-card" id="download">
+    <div class="dl-wrap">
     <a class="btn" href="https://github.com/nazsa13/Windows11-Folder-Colors/releases/download/v3.1/FolderColors-v3.1.zip" download rel="noopener">⬇ Download FolderColors-v3.1.zip</a>
     <div class="meta">Latest release · v3.1 · 358 KB · extracts to <b>FolderColors\</b> · install = one double-click · <a href="https://github.com/nazsa13/Windows11-Folder-Colors/releases/tag/v3.1" rel="noopener">release notes</a></div>
+    </div>
   </div>
 
   <p class="answer-first">
@@ -430,5 +472,26 @@
   </footer>
 
 </div>
+
+<script>
+(function(){
+  var btn = document.getElementById("theme-toggle");
+  var meta = document.querySelector('meta[name="theme-color"]');
+  function current(){ return document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light"; }
+  function paint(){
+    var dark = current() === "dark";
+    btn.textContent = dark ? "\u2600\uFE0F Light" : "\u263D Dark";
+    if (meta) { meta.content = dark ? "#0e1319" : "#f7f9fb"; }
+  }
+  btn.addEventListener("click", function(){
+    var next = current() === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", next);
+    try { localStorage.setItem("fc-theme", next); } catch (e) {}
+    paint();
+  });
+  paint();
+})();
+</script>
+
 </body>
 </html>
