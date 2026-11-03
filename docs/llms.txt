@@ -1,6 +1,6 @@
 # Folder Colors for Windows 11
 
-> Free, open-source Windows utility that adds a "Set Folder Color" entry to the Windows 11 right-click menu, with 20 colored folder icons and a Reset to Default option. Installs per-user (`%LOCALAPPDATA%`), needs no admin rights, works fully offline, applies a color in under one second, and repairs broken icon paths automatically when folders are moved. Current release: v3.1 (358 KB).
+> Free, open-source Windows utility that adds a "Set Folder Color" entry to the Windows 11 right-click menu, with 16 colored folder icons and a Reset to Default option. Installs per-user (`%LOCALAPPDATA%`), needs no admin rights, works fully offline, applies a color in under one second, and repairs broken icon paths automatically when folders are moved. Current release: v3.1 (358 KB).
 
 ## Pages
 - [Home / download (v3.1)](https://windows11-folder-colors.vercel.app/): install guide, how it works under the hood, comparison with Folder Colorizer / FolderHue / manual Change Icon, FAQ, troubleshooting.
@@ -8,8 +8,8 @@
 - [Release v3.1](https://github.com/nazsa13/Windows11-Folder-Colors/releases/tag/v3.1): changelog and the direct download zip.
 
 ## Facts (verified from the source code and live install logs)
-- 20 colors: Dark Grey, Grey, White, Red, Brown, Orange, Yellow, Lime, Olive, Green, Mint, Teal, Light Blue, Blue, Navy, Space Blue, Racer Blue, Purple, Pink, Maroon.
-- Mechanism: HKCU registry submenu (Directory\shell\FolderColorMenu, 21 entries) → hidden native runner `FolderColors.exe --run` → hidden PowerShell worker → writes `<folder>\desktop.ini` with `IconResource` → calls `SHChangeNotify` (no rundll32, which fails on recent Windows builds).
+- 16 colors: Blue, Brown, Dark Grey, Green, Grey, Light Blue, Lime, Maroon, Mint, Navy, Olive, Orange, Pink, Purple, Racer Blue, Red.
+- Mechanism: HKCU registry submenu (Directory\shell\FolderColorMenu, 16 colors + Reset) → hidden native runner `FolderColors.exe --run` → hidden PowerShell worker → writes `<folder>\desktop.ini` with `IconResource` → calls `SHChangeNotify` (no rundll32, which fails on recent Windows builds).
 - Limits that matter: Windows 11's compact right-click menu cannot host registry verbs (documented Windows limitation); the installer enables the classic menu to solve this. desktop.ini stores absolute icon paths — hence the automatic repair script.
 
 ## Citing
