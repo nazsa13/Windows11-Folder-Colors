@@ -3,7 +3,122 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Windows 11 Folder Colors — Free Download</title>
+
+<title>How to Color Folders in Windows 11 — Free Right-Click Tool | Folder Colors</title>
+<meta name="description" content="Free open-source tool that adds Set Folder Color to the Windows 11 right-click menu: 20 colored folder icons, one click to apply, no admin rights needed.">
+<meta name="keywords" content="color folders windows 11, change folder color windows 11, colored folder icons windows 11, folder color app, right click folder color, free folder colorizer">
+<link rel="canonical" href="https://windows11-folder-colors.vercel.app/">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="theme-color" content="#10141e">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Windows 11 Folder Colors">
+<meta property="og:title" content="Color Your Windows 11 Folders With One Right-Click — Free">
+<meta property="og:description" content="Add 'Set Folder Color' to your Windows 11 right-click menu: 20 colored folder icons, applied instantly, no admin rights, fully offline. Free & open source.">
+<meta property="og:url" content="https://windows11-folder-colors.vercel.app/">
+<meta property="og:image" content="https://windows11-folder-colors.vercel.app/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Color Your Windows 11 Folders — a row of 20 colored folder icons from the Folder Colors tool">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Color Your Windows 11 Folders With One Right-Click — Free">
+<meta name="twitter:description" content="Free open-source tool: 20 colored folder icons in the right-click menu, one click to apply, no admin rights, fully offline.">
+<meta name="twitter:image" content="https://windows11-folder-colors.vercel.app/og-image.png">
+
+<!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "Folder Colors for Windows 11",
+      "alternateName": "Windows11-Folder-Colors",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Windows 11, Windows 10",
+      "url": "https://windows11-folder-colors.vercel.app/",
+      "downloadUrl": "https://github.com/nazsa13/Windows11-Folder-Colors/releases/download/v3.1/FolderColors-v3.1.zip",
+      "softwareVersion": "3.1",
+      "fileSize": "358 KB",
+      "description": "Open-source shell extension that adds a 'Set Folder Color' entry to the Windows 11 right-click menu, with 20 colored folder icons and a Reset to Default option. Installs per-user without admin rights.",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "author": { "@type": "Person", "name": "nazsa13", "url": "https://github.com/nazsa13" },
+      "license": "https://opensource.org/licenses/MIT",
+      "featureList": "20 folder colors, Reset to Default, instant desktop.ini write, no console windows, no rundll32, automatic repair of broken icon paths",
+      "isAccessibleForFree": true
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to color folders in Windows 11 with Folder Colors",
+      "totalTime": "PT2M",
+      "tool": [{ "@type": "HowToTool", "name": "FolderColors-v3.1.zip" }],
+      "step": [
+        { "@type": "HowToStep", "position": 1, "name": "Download and extract", "text": "Download FolderColors-v3.1.zip (358 KB) and extract it anywhere local, e.g. C:\\Tools\\FolderColors." },
+        { "@type": "HowToStep", "position": 2, "name": "Run the installer", "text": "Double-click install.cmd in the extracted folder. Everything installs per-user to %LOCALAPPDATA%\\Programs\\FolderColors — no admin prompt appears." },
+        { "@type": "HowToStep", "position": 3, "name": "Right-click a folder", "text": "Right-click any folder, choose Set Folder Color, and pick one of 20 colors. If the entry is missing after install, restart File Explorer once." }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How can I change the color of folders in Windows 11?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Windows 11 removed the color options Windows 10 had, so you need colored icon files. Folder Colors installs 20 colored folder icons and a 'Set Folder Color' entry in the right-click menu: click a color and the folder's desktop.ini is rewritten in under a second. Install takes about 2 minutes and needs no admin rights." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the best free software to change folder colors in Windows 11?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Folder Colors is free and open source (MIT-style), 358 KB, installs per-user without admin rights, and shows all 20 colors directly in the right-click menu — no separate app window needed. Alternatives like Folder Colorizer or FolderHue are freemium and store-based." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I change folder color in Windows 11 without software?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes, manually: right-click the folder, Properties, Customize, Change Icon, then pick a colored .ico file. But Windows 11 ships no colored folder icons, so you must find or make them. Folder Colors automates exactly this — it writes the same desktop.ini IconResource values, with 20 ready-made icons." }
+        },
+        {
+          "@type": "Question",
+          "name": "Why doesn't the Set Folder Color entry appear in Windows 11's right-click menu?",
+          "acceptedAnswer": { "@type": "Answer", "text": "The Windows 11 compact right-click menu cannot host registry-based menu entries at all — a Windows limitation. The installer enables the classic context menu, which shows the entry on the first click. Without it, entries live under 'Show more options', and restarting File Explorer (Task Manager → Windows Explorer → Restart) is required after first install." }
+        },
+        {
+          "@type": "Question",
+          "name": "Does changing folder colors require admin rights?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. Folder Colors edits only HKEY_CURRENT_USER registry keys and writes to %LOCALAPPDATA%, so everything runs per-user. Windows stores custom folder icons per folder via desktop.ini, and writing desktop.ini only needs write access to that folder." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is it safe to color folders with desktop.ini?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Custom folder icons via desktop.ini IconResource are a documented Windows mechanism (see Microsoft's desktop.ini documentation linked below). Folder Colors touches nothing else: no system files, no global registry, no DLL injection. Uninstall is one command and recovers the default yellow folder." }
+        },
+        {
+          "@type": "Question",
+          "name": "Why did my folder color change stop working after moving the folder?",
+          "acceptedAnswer": { "@type": "Answer", "text": "desktop.ini stores an absolute path to the icon library. If the installed library moves (or gets synced by OneDrive), icons break. The extracted download folder can be deleted freely — only the installed copy at %LOCALAPPDATA%\\Programs\\FolderColors matters — and re-running the installer or Repair-FolderColors.ps1 -Apply rebinds every broken path automatically." }
+        }
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "name": "Windows 11 Folder Colors — free download",
+      "url": "https://windows11-folder-colors.vercel.app/",
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://windows11-folder-colors.vercel.app/" },
+          { "@type": "ListItem", "position": 2, "name": "Download v3.1", "item": "https://github.com/nazsa13/Windows11-Folder-Colors/releases/tag/v3.1" }
+        ]
+      },
+      "about": { "@type": "SoftwareApplication", "name": "Folder Colors for Windows 11" }
+    }
+  ]
+}
+</script>
+
 <style>
   :root { --accent:#0a84ff; --bg:#f6f7f9; --card:#fff; --text:#1c1e21; --muted:#5a6472; --warn-bg:#fff7e6; --warn-border:#f0b429; }
   * { box-sizing:border-box; margin:0; padding:0; }
@@ -11,7 +126,7 @@
   .wrap { max-width:880px; margin:0 auto; padding:32px 20px 80px; }
   header { text-align:center; padding:28px 0 30px; }
   h1 { font-size:2.1rem; margin-bottom:6px; }
-  .tagline { color:var(--muted); font-size:1.05rem; max-width:640px; margin:0 auto; }
+  .tagline { color:var(--muted); font-size:1.05rem; max-width:680px; margin:0 auto; }
   .badge { display:inline-block; background:#e2f3e8; color:#1c7a3d; font-size:.8rem; font-weight:600; border-radius:999px; padding:3px 12px; margin-top:10px; }
   .download-card { background:linear-gradient(180deg,#fff,#f0f6ff); border:1px solid #d7e3f4; border-radius:14px; padding:26px; text-align:center; margin:24px 0; }
   .btn { display:inline-block; background:var(--accent); color:#fff; text-decoration:none; font-weight:600; font-size:1.05rem; padding:14px 34px; border-radius:10px; box-shadow:0 3px 10px rgba(10,132,255,.35); }
@@ -28,56 +143,147 @@
   th, td { border:1px solid #e6e9ee; padding:8px 10px; text-align:left; vertical-align:top; }
   th { background:#eef2f7; }
   footer { text-align:center; color:var(--muted); font-size:.85rem; margin-top:50px; }
-  .step-num { display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px; background:var(--accent); color:#fff; border-radius:50%; font-weight:700; margin-right:8px; }
+  .step-num { display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px; background:var(--accent); color:#fff; border-radius:50%; font-weight:700; margin-right:8px; flex-shrink:0; }
   .step { display:flex; align-items:flex-start; margin:16px 0; }
+  .answer-first { background:#eef4ff; border-left:4px solid var(--accent); border-radius:8px; padding:14px 18px; margin:14px 0; }
+  .stats { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:10px 0 0; }
+  .stat { background:var(--card); border:1px solid #e6e9ee; border-radius:10px; padding:10px 16px; text-align:center; min-width:120px; }
+  .stat b { display:block; font-size:1.3rem; color:var(--accent); }
+  .stat span { color:var(--muted); font-size:.8rem; }
+  .hero-img { display:block; max-width:100%; border-radius:12px; border:1px solid #d7e3f4; margin:20px auto 0; }
+  details summary { cursor:pointer; font-weight:600; margin:4px 0; }
+  .faq-q { font-weight:600; margin-top:12px; }
 </style>
 </head>
 <body>
 <div class="wrap">
 
   <header>
-    <h1>Windows 11 Folder Colors</h1>
+    <h1>Windows 11 Folder Colors — Change Folder Icons From the Right-Click Menu</h1>
     <p class="tagline">Right-click any folder → <b>Set Folder Color</b> → pick one of 20 colored icons, or <b>Reset to Default</b>. Runs fully hidden — no console windows, no popups, no installer UI.</p>
-    <span class="badge">✓ per-user · no admin rights · no execution-policy changes</span>
+    <span class="badge">✓ per-user install · no admin rights · no execution-policy changes · works offline</span>
   </header>
 
+  <nav aria-label="Page sections" style="text-align:center; font-size:.9rem; color:var(--muted);">
+    <a href="#download">Download</a> ·
+    <a href="#what-you-get">What you get</a> ·
+    <a href="#setup">Setup in 2 minutes</a> ·
+    <a href="#how-it-works">How it works</a> ·
+    <a href="#comparison">Comparison</a> ·
+    <a href="#faq">FAQ</a> ·
+    <a href="#troubleshooting">Troubleshooting</a>
+  </nav>
+
+  <main>
+  <p class="answer-first" id="download">
+    <b>Answer first:</b> to color folders in Windows 11 you need colored icon files, because Windows 11 removed
+    the color feature Windows 10 had. <b>Folder Colors</b> is a free, open-source shell extension that adds a
+    <i>Set Folder Color</i> submenu to your right-click menu with 20 colored folder icons. Download the 358 KB zip,
+    double-click <code>install.cmd</code>, and you're done in about 2 minutes.
+  </p>
+
   <div class="download-card">
-    <a class="btn" href="https://github.com/nazsa13/Windows11-Folder-Colors/releases/download/v3.1/FolderColors-v3.1.zip" download>⬇ Download FolderColors.zip</a>
-    <div class="meta">Latest release · v3.1 · ~350 KB · extracts to <b>FolderColors\</b> · install = one double-click</div>
+    <a class="btn" href="https://github.com/nazsa13/Windows11-Folder-Colors/releases/download/v3.1/FolderColors-v3.1.zip" download rel="noopener">⬇ Download FolderColors-v3.1.zip</a>
+    <div class="meta">Latest release · v3.1 · 358 KB · extracts to <b>FolderColors\</b> · install = one double-click · <a href="https://github.com/nazsa13/Windows11-Folder-Colors/releases/tag/v3.1" rel="noopener">release notes</a></div>
   </div>
 
-  <h2>What you get</h2>
+  <div class="stats" aria-label="Key facts">
+    <div class="stat"><b>20</b><span>folder colors</span></div>
+    <div class="stat"><b>&lt; 1 s</b><span>color apply time</span></div>
+    <div class="stat"><b>0</b><span>admin rights needed</span></div>
+    <div class="stat"><b>358 KB</b><span>download size</span></div>
+    <div class="stat"><b>100%</b><span>offline, after install</span></div>
+  </div>
+
+  <img class="hero-img" src="og-image.png" width="1200" height="630" loading="lazy"
+       alt="Preview of the Folder Colors tool: a dark banner with 20 colored folder icons in a grid, captioned “Color Your Windows 11 Folders — 20 colored icons in the right-click menu”">
+
+  <h2 id="what-you-get">What you get</h2>
   <div class="card">
     <div class="menutree">
       Right-click any folder<br>
-      ├─ 20 colors (Dark Grey → Maroon, each with its real icon in the menu)<br>
-      └─ <b>Reset to Default</b> — removes the folder's desktop.ini, restores the yellow icon
+      ├─ 20 colors (Dark Grey → Maroon, each shown with its real icon in the menu)<br>
+      └─ <b>Reset to Default</b> — removes the folder's desktop.ini, restores the standard yellow icon
     </div>
     <ul>
       <li>Everything lives in the <b>classic full right-click menu</b>, directly on the first click (the installer enables the classic-menu toggle for you).</li>
-      <li>Windows 11's compact right-click menu cannot host registry menu entries at all — that is a Windows limitation, not a tool one.</li>
+      <li>Windows 11's compact right-click menu cannot host registry menu entries at all — that is a <a href="https://learn.microsoft.com/en-us/windows/apps/desktop/modernize/desktop-6/modernize-keyboard-interactions#new-registration--iuiexecutioncommand" rel="noopener noreferrer" target="_blank">documented Windows limitation</a>, not a tool one.</li>
+      <li>Colors apply instantly: the tool writes the folder's <code>desktop.ini</code> (the <a href="https://learn.microsoft.com/en-us/windows/win32/shell/how-to-assign-a-custom-icon-to-a-folder" rel="noopener noreferrer" target="_blank">documented Windows mechanism</a> for custom folder icons) in under a second; Explorer refreshes the icon itself a few seconds later.</li>
     </ul>
   </div>
 
-  <h2>How to set it up (2 minutes)</h2>
+  <h2 id="setup">How to set it up (2 minutes)</h2>
   <div class="card">
     <div class="step"><span class="step-num">1</span><div><b>Download and extract</b> the zip anywhere local — e.g. <code>C:\Tools\FolderColors\</code>. You can delete or move the extracted folder later (see the warning below).</div></div>
     <div class="step"><span class="step-num">2</span><div><b>Double-click <code>install.cmd</code></b> inside the extracted <code>FolderColors\</code> folder. A console shows the progress and pauses at the end. No admin prompt — everything installs per-user to <code>%LOCALAPPDATA%\Programs\FolderColors</code> and the menu is registered immediately.</div></div>
     <div class="step"><span class="step-num">3</span><div><b>Right-click a folder → Set Folder Color → pick a color.</b> If the entry isn't there on the first right-click, restart File Explorer once (Task Manager → Windows Explorer → Restart) and it will be.</div></div>
   </div>
 
-  <h2>How it works</h2>
+  <h2 id="how-it-works">How it works</h2>
   <div class="card">
 <pre>Explorer right-click
   → registry submenu (HKCU\...\Directory\shell\FolderColorMenu, 21 items)
       → FolderColors.exe --run color "&lt;folder&gt;" &lt;index&gt;    (hidden native runner)
           → Run-MenuAction.ps1 (hidden PowerShell worker)
-              → writes &lt;folder&gt;\desktop.ini  (IconResource =&lt;stable icon library&gt;)
+              → writes &lt;folder&gt;\desktop.ini  (IconResource =&gt; stable icon library)
                   → SHChangeNotify() → Explorer refreshes the icon</pre>
     <ul>
       <li><b>No console flash:</b> the registry points at a small native exe that spawns PowerShell with window creation disabled — nothing is ever visible.</li>
-      <li><b>No rundll32:</b> older builds popped "Error in shell32.dll — Missing entry: SHChangeNotify_RunDLL" on recent Windows builds; all notify paths now call the shell API directly.</li>
+      <li><b>No rundll32:</b> older builds popped "Error in shell32.dll — Missing entry: SHChangeNotify_RunDLL" on recent Windows builds; all notify paths now call the <a href="https://learn.microsoft.com/en-us/windows/win32/api/shlobj_core/nf-shlobj_core-shchangenotify" rel="noopener noreferrer" target="_blank">SHChangeNotify shell API directly</a>.</li>
+      <li><b>Self-repairing:</b> every install run rebinds colored folders whose icon paths broke after moving or syncing elements.</li>
     </ul>
+  </div>
+
+  <h2 id="comparison">How it compares</h2>
+  <div class="card">
+    <table>
+      <tr><th scope="col"></th><th scope="col">Folder Colors (this tool)</th><th scope="col">Folder Colorizer 2</th><th scope="col">FolderHue</th><th scope="col">Manual (Change Icon)</th></tr>
+      <tr><td>Price</td><td>Free, open source</td><td>Freemium</td><td>Freemium</td><td>Free</td></tr>
+      <tr><td>Colors included</td><td>20</td><td>~11 free</td><td>Store-stated 24</td><td>0 (find your own icons)</td></tr>
+      <tr><td>Apply</td><td>Right-click menu</td><td>App window</td><td>Right-click menu</td><td>Properties dialog, 4 clicks</td></tr>
+      <tr><td>Admin rights</td><td>No</td><td>Yes</td><td>No</td><td>No</td></tr>
+      <tr><td>Offline / telemetry</td><td>Fully offline</td><td>Server checks</td><td>Microsoft Store app</td><td>Fully offline</td></tr>
+      <tr><td>Repair after moves</td><td>Automatic</td><td>—</td><td>—</td><td>—</td></tr>
+    </table>
+  </div>
+
+  <h2 id="faq">FAQ</h2>
+  <div class="card">
+    <p class="faq-q">How can I change the color of folders in Windows 11?</p>
+    <p>Windows 11 removed the color options Windows 10 had, so you need colored icon files. Folder Colors
+    installs 20 colored folder icons and a <i>Set Folder Color</i> entry in the right-click menu: click a color
+    and the folder's <code>desktop.ini</code> is rewritten in under a second. Install takes about 2 minutes and needs no admin rights.</p>
+
+    <p class="faq-q">What is the best free software to change folder colors?</p>
+    <p>Folder Colors is free and open source, 358 KB, installs per-user without admin rights, and shows all
+    20 colors directly in the right-click menu — no separate app window needed. Alternatives like
+    Folder Colorizer or FolderHue are freemium and store-based.</p>
+
+    <p class="faq-q">Can I change folder color in Windows 11 without software?</p>
+    <p>Yes, manually: right-click the folder → Properties → Customize → Change Icon, then pick a colored
+    <code>.ico</code> file. But Windows 11 ships no colored folder icons, so you must find or make them.
+    Folder Colors automates exactly this — it writes the same <code>desktop.ini</code> IconResource values, with 20 ready-made icons.</p>
+
+    <p class="faq-q">Why doesn't the Set Folder Color entry appear in Windows 11's right-click menu?</p>
+    <p>The Windows 11 compact right-click menu cannot host registry-based menu entries at all — a Windows limitation.
+    The installer enables the classic context menu, which shows the entry on the first click. Without it, entries
+    live under <i>Show more options</i>, and restarting File Explorer is required after first install.</p>
+
+    <p class="faq-q">Does changing folder colors require admin rights?</p>
+    <p>No. Folder Colors edits only HKEY_CURRENT_USER registry keys and writes to %LOCALAPPDATA%, so everything
+    runs per-user. Windows stores custom folder icons per folder via desktop.ini, and writing desktop.ini only
+    needs write access to that folder.</p>
+
+    <p class="faq-q">Is it safe to color folders with desktop.ini?</p>
+    <p>Yes. Custom folder icons via desktop.ini IconResource are a documented Windows mechanism (linked above).
+    Folder Colors touches nothing else: no system files, no global registry, no DLL injection. Uninstall is one
+    command and recovers the default yellow folder.</p>
+
+    <p class="faq-q">Why did my folder color stop working after moving the folder?</p>
+    <p><code>desktop.ini</code> stores an absolute path to the icon library. If the installed library moves
+    (or gets synced by OneDrive), icons break. The extracted download folder can be deleted freely — only the
+    installed copy at <code>%LOCALAPPDATA%\Programs\FolderColors</code> matters — and re-running the installer
+    or <code>Repair-FolderColors.ps1 -Apply</code> rebinds every broken path automatically.</p>
   </div>
 
   <div class="warn">
@@ -104,10 +310,10 @@
     Removes all menu keys and the installed folder. Folders you already colored keep their desktop.ini until you reset them — run <b>Reset to Default</b> before uninstalling if you want them clean.
   </div>
 
-  <h2>Troubleshooting (quick view)</h2>
+  <h2 id="troubleshooting">Troubleshooting (quick view)</h2>
   <div class="card">
     <table>
-      <tr><th>Symptom</th><th>Fix</th></tr>
+      <tr><th scope="col">Symptom</th><th scope="col">Fix</th></tr>
       <tr><td>Menu missing entirely</td><td>Restart Explorer; re-run <code>install.cmd</code>.</td></tr>
       <tr><td>Entry only under “Show more options”</td><td>Classic menu toggle not set — reinstall (<code>install.cmd</code> sets it) or restore it manually.</td></tr>
       <tr><td>Color doesn't appear</td><td>Wait a few seconds / F5 / restart Explorer. If still nothing, check the library exists at the installed path and look at the log.</td></tr>
@@ -115,9 +321,13 @@
       <tr><td>Antivirus quarantines <code>FolderColors.exe</code></td><td>False positive on an unsigned self-built exe. Add exclusions for <code>%LOCALAPPDATA%\Programs\FolderColors</code>, restore the file, done.</td></tr>
     </table>
   </div>
+  </main>
 
   <footer>
-    Source code and full documentation: <a href="https://github.com/nazsa13/Windows11-Folder-Colors">GitHub repository</a> · Note: Explorer's icon cache may delay color changes by a few seconds
+    Folder Colors v3.1 · free & open source ·
+    <a href="https://github.com/nazsa13/Windows11-Folder-Colors" rel="noopener noreferrer">source code on GitHub</a> ·
+    <a href="https://github.com/nazsa13/Windows11-Folder-Colors/releases" rel="noopener noreferrer">all releases</a>.
+    Note: Explorer's icon cache may delay color changes by a few seconds — the color itself is written instantly.
   </footer>
 
 </div>
