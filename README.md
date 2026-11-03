@@ -1,6 +1,6 @@
 # Windows 11 Folder Colors
 
-Adds a **`Set Folder Color`** submenu to the right-click menu of any folder in Windows Explorer, with 20 colored folder icons and a **`Reset to Default`** action.
+Adds a **`Set Folder Color`** submenu to the right-click menu of any folder in Windows Explorer, with 16 colored folder icons and a **`Reset to Default`** action.
 
 Works fully in the background — no console flashes, no GUI popups, no installer windows. Menu-only by design.
 
@@ -23,7 +23,7 @@ Set Folder Color            (one entry, opens a submenu)
 ├── Yellow                       └── Reset to Default
 ```
 
-- **20 colors + Reset**, each color child carries the real colored icon in the menu itself.
+- **16 colors + Reset**, each color child carries the real colored icon in the menu itself.
 - `Reset to Default` lives **inside** the submenu and deletes the folder's `desktop.ini`, restoring the standard yellow folder icon.
 - There is **no** separate one-click picker entry and **no** GUI dialog — the old `FolderColorPicker` entry was deliberately removed.
 
@@ -40,10 +40,10 @@ Explorer right-click
                   → SHChangeNotify() P/Invoke → Explorer notices → icon refreshes
 ```
 
-1. **Registry** — static shell verbs. The parent key `FolderColorMenu` has `MUIVerb = "Set Folder Color"` and `SubCommands` **empty on purpose** (a non-empty value makes Explorer resolve verbs from Explorer's CommandStore and renders an empty flyout). Each of the 21 children (`shell\<ColorId>\command`) contains the runner command with the color index.
+1. **Registry** — static shell verbs. The parent key `FolderColorMenu` has `MUIVerb = "Set Folder Color"` and `SubCommands` **empty on purpose** (a non-empty value makes Explorer resolve verbs from Explorer's CommandStore and renders an empty flyout). Each of the 17 children (`shell\<ColorId>\command`) contains the runner command with the color index.
 2. **`FolderColors.exe`** — a small native C# runner (compiled from [launcher/AppLauncher.cs](launcher/AppLauncher.cs), no SDK needed). It is registered as the command for every menu item. It spawns PowerShell **with `CreateNoWindow = true`** — this is why nothing ever flashes. Double-clicking it deliberately does nothing (it has no GUI and refuses to act as an installer).
 3. **`app\Run-MenuAction.ps1`** — the hidden worker. Applies (`--run color`) or resets (`--run reset`), writes `desktop.ini` as Unicode, sets folder attributes (`+s +r` on the folder, `+h` on the ini), then notifies the shell.
-4. **Icon library** — `Windows_11_coloured_icons.icl` (6 MB, 20 colored folder icons as 20 icon resources indexed 0–19). Lives in the installed `icons\` folder; `desktop.ini` files point **absolute paths** at it.
+4. **Icon library** — `Windows_11_coloured_icons.icl` (6 MB, colored folder icon resources indexed 0–19; the menu exposes 16 of them). Lives in the installed `icons\` folder; `desktop.ini` files point **absolute paths** at it.
 
 ### How each colored folder is stored
 
@@ -73,7 +73,7 @@ HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer3
 | Component | State on this device |
 |---|---|
 | OS / PowerShell | Windows 11 26300 (25H2), PowerShell 5.1 — supported and tested |
-| Menu entry | `FolderColorMenu` - MUIVerb `Set Folder Color`, **21 children** (20 colors + Reset) |
+| Menu entry | `FolderColorMenu` - MUIVerb `Set Folder Color`, **17 children** (16 colors + Reset) |
 | GUI picker entry | **absent** (removed everywhere: registry, installer, worker, legacy .reg) |
 | Installer exes | **none** (Setup/Uninstall/Install deleted from source, build and app dir; runner-only exe) |
 | Classic menu | **enabled** (entries on first right-click) |
@@ -108,7 +108,7 @@ HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer3
 
 1. **Download** `FolderColors.zip` from the project's GitHub Releases page (the download page mirrors this guide). Extract it anywhere you like — e.g. `C:\Tools\FolderColors\`. Any folder works on disk; see § 7 before moving synced/cloud paths around later.
 2. **Double-click `install.cmd`** inside the extracted folder. That's it — the console window shows progress and pauses at the end so you can read it. No admin rights, no execution-policy change (per-user HKCU only).
-3. Right-click a folder: `Set Folder Color` is already there with all 20 colors and `Reset to Default`.
+3. Right-click a folder: `Set Folder Color` is already there with all 16 colors and `Reset to Default`.
 
 What `install.cmd` does: runs `Install-FolderColors.ps1 -ClassicMenu` (full right-click menu as default, same as this machine's setup). To install while keeping Windows 11's compact default menu, run the installer without `-ClassicMenu` from PowerShell instead.
 

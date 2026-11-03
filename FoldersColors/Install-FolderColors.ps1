@@ -92,20 +92,16 @@ $parentBase = "Registry::HKEY_CURRENT_USER\Software\Classes\Directory\shell"
 $colors = @(
     @{ Id = "DarkGrey"; Name = "Dark Grey"; Index = 0 },
     @{ Id = "Grey"; Name = "Grey"; Index = 1 },
-    @{ Id = "White"; Name = "White"; Index = 2 },
     @{ Id = "Red"; Name = "Red"; Index = 3 },
     @{ Id = "Brown"; Name = "Brown"; Index = 4 },
     @{ Id = "Orange"; Name = "Orange"; Index = 5 },
-    @{ Id = "Yellow"; Name = "Yellow"; Index = 6 },
     @{ Id = "Lime"; Name = "Lime"; Index = 7 },
     @{ Id = "Olive"; Name = "Olive"; Index = 8 },
     @{ Id = "Green"; Name = "Green"; Index = 9 },
     @{ Id = "Mint"; Name = "Mint"; Index = 10 },
-    @{ Id = "Teal"; Name = "Teal"; Index = 11 },
     @{ Id = "LightBlue"; Name = "Light Blue"; Index = 12 },
     @{ Id = "Blue"; Name = "Blue"; Index = 13 },
     @{ Id = "Navy"; Name = "Navy"; Index = 14 },
-    @{ Id = "SpaceBlue"; Name = "Space Blue"; Index = 15 },
     @{ Id = "RacerBlue"; Name = "Racer Blue"; Index = 16 },
     @{ Id = "Purple"; Name = "Purple"; Index = 17 },
     @{ Id = "Pink"; Name = "Pink"; Index = 18 },
@@ -164,6 +160,19 @@ Set-RegistryStringValue -Path $menuPath -Name "MUIVerb" -Value "Set Folder Color
 Set-RegistryStringValue -Path $menuPath -Name "Icon" -Value $menuIconPath
 Set-RegistryStringValue -Path $menuPath -Name "SubCommands" -Value ""
 
+# Remove color children that the menu no longer ships (older installs may have
+# registered entries this version dropped).
+$keepIds = @(($colors | ForEach-Object { $_.Id }) + "Reset")
+$menuShellPath = Join-Path $menuPath "shell"
+if (Test-Path -LiteralPath $menuShellPath) {
+    foreach ($child in (Get-ChildItem -LiteralPath $menuShellPath)) {
+        if ($keepIds -notcontains $child.PSChildName) {
+            Remove-Item -LiteralPath $child.PSPath -Recurse -Force
+            Write-Host "Removed stale color entry: $($child.PSChildName)"
+        }
+    }
+}
+
 foreach ($color in $colors) {
     $itemPath = Join-Path (Join-Path $menuPath "shell") $color.Id
     Set-RegistryStringValue -Path $itemPath -Name "MUIVerb" -Value $color.Name
@@ -215,7 +224,7 @@ if ($usingRunner) {
 } else {
     Write-Host "Note: launcher exes not found next to this script; menu uses hidden PowerShell windows."
 }
-Write-Host "  'Set Folder Color' - right-click submenu with all 20 colors + Reset to Default."
+Write-Host "  'Set Folder Color' - right-click submenu with all 16 colors + Reset to Default."
 if (-not $ClassicMenu) {
     Write-Host "Note: the Windows 11 compact menu cannot host registry verbs; entries appear under"
     Write-Host "'Show more options'. Re-run with -ClassicMenu to put them on the first right-click."
