@@ -1,0 +1,62 @@
+Windows Registry Editor Version 5.00
+
+; =========================
+; Remove context menu entries (current + legacy layouts)
+; =========================
+[-HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorPicker]
+[-HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu]
+[-HKEY_CLASSES_ROOT\Directory\shell\FolderColor1]
+[-HKEY_CLASSES_ROOT\Directory\shell\FolderColor2]
+
+; If you ever installed system-wide under HKLM\SOFTWARE\Classes, remove too:
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\shell\FolderColor1]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\shell\FolderColor2]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\shell\FolderColorPicker]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\shell\FolderColorMenu]
+
+; =========================
+; Remove CommandStore entries (HKLM)
+; =========================
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\FolderColor.Test]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\FolderColor.DarkGrey]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\FolderColor.Grey]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\FolderColor.White]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\FolderColor.Red]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\FolderColor.Brown]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\FolderColor.Orange]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\FolderColor.Yellow]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\FolderColor.Lime]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\FolderColor.Olive]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\FolderColor.Green]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\FolderColor.Mint]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\FolderColor.Teal]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\FolderColor.LightBlue]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\FolderColor.Blue]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\FolderColor.Navy]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\FolderColor.SpaceBlue]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\FolderColor.RacerBlue]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\FolderColor.Purple]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\FolderColor.Pink]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\FolderColor.Maroon]
+
+; (Optional) If you ever wrote commands to HKCU CommandStore, remove them too:
+[-HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\FolderColor.DarkGrey]
+[-HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\FolderColor.Grey]
+[-HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\FolderColor.White]
+[-HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\FolderColor.Red]
+[-HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\FolderColor.Brown]
+[-HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\FolderColor.Orange]
+[-HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\FolderColor.Yellow]
+[-HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\FolderColor.Lime]
+[-HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\FolderColor.Olive]
+[-HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\FolderColor.Green]
+[-HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\FolderColor.Mint]
+[-HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\FolderColor.Teal]
+[-HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\FolderColor.LightBlue]
+[-HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\FolderColor.Blue]
+[-HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\FolderColor.Navy]
+[-HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\FolderColor.SpaceBlue]
+[-HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\FolderColor.RacerBlue]
+[-HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\FolderColor.Purple]
+[-HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\FolderColor.Pink]
+[-HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\FolderColor.Maroon]
