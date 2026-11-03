@@ -15,16 +15,9 @@ Works fully in the background — no console flashes, no GUI popups, no installe
 
 Right-click any folder:
 
-```
-Set Folder Color            (one entry, opens a submenu)
-├── Dark Grey      ├── Lime      ├── Light Blue   ├── Purple
-├── Grey           ├── Olive     ├── Blue
-├── White          ├── Green     ├── Navy
-├── Red            ├── Mint      ├── Space Blue
-├── Brown          ├── Teal      ├── Racer Blue
-├── Orange         └── (… etc.)  ├── Pink
-├── Yellow                       └── Reset to Default
-```
+![The Set Folder Color right-click submenu with real colored folder icons](docs/menu-screenshot.png)
+
+*The real flyout — one entry, and the list continues past Red to White, Yellow, Teal and Space Blue, plus **Reset to Default**.*
 
 - **20 colors + Reset**, each color child carries the real colored icon in the menu itself.
 - `Reset to Default` lives **inside** the submenu and deletes the folder's `desktop.ini`, restoring the standard yellow folder icon.
