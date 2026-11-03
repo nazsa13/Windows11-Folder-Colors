@@ -6,6 +6,9 @@ Works fully in the background — no console flashes, no GUI popups, no installe
 
 ![Showcase](Showcase.png)
 
+**Note: The `.icl` file used in this Project is Not Made by me, i only made the codes.**
+([.icl Source](https://www.deviantart.com/abs96/art/Windows-11-coloured-folder-icons-896431403))
+
 ---
 
 ## 1. What it looks like
@@ -89,7 +92,7 @@ HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer3
 | `FoldersColors/Install-FolderColors.ps1` | **The installer.** Deploys the app to `%LOCALAPPDATA%\Programs\FolderColors`, registers the menu, deletes legacy leftovers (GUI-picker key, FolderColor1/2, stub exes), re-points broken desktop.ini files, sets the classic-menu toggle with `-ClassicMenu`. |
 | `FoldersColors/Uninstall-FolderColors.ps1` | **The uninstaller.** Removes all menu keys (incl. every legacy layout), deletes the app dir, restarts Explorer. |
 | `FoldersColors/FolderColors.exe` | The hidden runner (the only exe). Compiled output; never call it by hand — the menu does. |
-| `FoldersColors/Windows_11_coloured_icons.icl` | The 20-color icon library (the payload everything points at). |
+| `FoldersColors/Windows_11_coloured_icons.icl` | The icon library (20 icon resources indexed 0–19; the menu exposes 16 of them) — **third-party**, see the credit up top. |
 | `FoldersColors/MenuIcon.ico` | Icon shown on the menu entry itself. |
 | `FoldersColors/Repair-FolderColors.ps1` | Re-points broken `desktop.ini` files at the live library. Dry-run by default; pass `-Apply`. |
 | `FoldersColors/Set-FolderIcon.ps1` | Apply a color from a script: `-Folder <path> -IconIndex 3 -Apply`. |
