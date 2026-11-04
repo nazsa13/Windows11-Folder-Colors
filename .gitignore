@@ -8,3 +8,6 @@ FoldersColors/FolderColors.exe
 FoldersColors/desktop.ini
 FoldersColors/New folder/
 *.log
+
+# Raw right-click captures (docs/menu-screenshot.png is the combined, committed image)
+MenuScreenshot*.png
