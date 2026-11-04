@@ -5,6 +5,9 @@ $ErrorActionPreference = "Stop"
 # Registry cleanup: current + every legacy layout this project ever used.
 # ------------------------------------------------------------------
 $registryPaths = @(
+    "Registry::HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu1",
+    "Registry::HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu2",
+    "Registry::HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorReset",
     "Registry::HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorPicker",
     "Registry::HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu",
     "Registry::HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColor1",
@@ -59,5 +62,5 @@ Write-Host "If entries still appear, restart File Explorer once."
 Write-Host ""
 Write-Host "Note: folders you already colored keep their desktop.ini until you reset them."
 Write-Host "Their icons now point at the removed library, so they fall back to the default folder icon."
-Write-Host "To restore a folder cleanly, use the 'Reset to Default' menu action BEFORE uninstalling,"
+Write-Host "To restore a folder cleanly, use the 'Reset Folder Color' menu action BEFORE uninstalling,"
 Write-Host "or run Reset-FolderIcon.ps1 -Folder \"C:\path\to\folder\" from the repository copy."
