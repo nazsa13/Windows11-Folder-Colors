@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -186,10 +186,29 @@
     border-radius:999px; padding:7px 13px; cursor:pointer; font-size:.9rem; line-height:1;
   }
   .theme-toggle:hover { border-color:var(--link); }
+  .utility-controls {
+    position:absolute; top:16px; right:18px; z-index:5;
+    display:flex; gap:8px;
+  }
+  .utility-controls .theme-toggle { position:static; }
+  .language-toggle {
+    border:1px solid var(--line); background:var(--card); color:var(--ink);
+    border-radius:999px; padding:7px 13px; cursor:pointer; font-size:.9rem; line-height:1;
+  }
+  .language-toggle:hover { border-color:var(--link); }
+  [dir="rtl"] body { font-family:"Segoe UI",Tahoma,Arial,sans-serif; }
+  [dir="rtl"] ul, [dir="rtl"] ol { padding-left:0; padding-right:24px; }
+  [dir="rtl"] th, [dir="rtl"] td { text-align:right; }
+  [dir="rtl"] .answer-first, [dir="rtl"] .warn {
+    border-left:0; border-right:5px solid #009688;
+  }
+  [dir="rtl"] .step-num { margin-right:0; margin-left:12px; }
+  [dir="rtl"] code, [dir="rtl"] pre { direction:ltr; text-align:left; }
+  [dir="rtl"] .theme-toggle, [dir="rtl"] .language-toggle { font-family:inherit; }
   .hero-banner { max-width:780px; margin:28px auto 0; padding:0 12px; }
   /* Phones: the theme toggle cannot sit on top of the colour chips, so it drops into flow. */
   @media (max-width:640px) {
-    .theme-toggle { position:static; display:block; margin:12px auto 0; }
+    .utility-controls { position:static; justify-content:center; margin:12px auto 0; }
     .hero-img-chips { padding-top:14px; }
     h1 { font-size:clamp(1.55rem, 7vw, 2rem); }
   }
@@ -275,7 +294,10 @@
     <span style="background:#9b2335"></span><span style="background:#f5f6f8"></span><span style="background:#fdd835"></span>
     <span style="background:#009688"></span><span style="background:#16255f"></span>
   </div>
-  <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch light/dark theme" title="Switch light/dark theme">🌒</button>
+  <div class="utility-controls">
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch light/dark theme" title="Switch light/dark theme">🌒</button>
+    <button class="language-toggle" id="language-toggle" type="button" aria-label="Switch to Arabic" title="Switch to Arabic">العربية</button>
+  </div>
   <header class="hero-inner">
     <nav class="site" aria-label="Page sections" style="order:2">
       <a href="#download">Download</a>·
@@ -337,7 +359,7 @@
         </a></div>
         <div class="figcap">The real right-click menu: <b>three entries</b>, and each submenu holds exactly <b>ten</b> colors in hue order — <i>Dark Grey → Green</i> on the left, <i>Mint → Maroon</i> on the right.</div>
       </div>
-      <div>
+      <div class="gallery-details">
         <ul>
           <li><b>All 20 colors, split 10 + 10:</b> <i>Set Folder Color (1/2): Dark to Green</i> and <i>Set Folder Color (2/2): Mint to Maroon</i> — each item shows its real colored folder icon right in the menu. Windows caps one static flyout at 16 items, so two submenus are the only way to expose all 20.</li>
           <li><b>Reset Folder Color</b> is its own top-level entry: one click removes the folder's <code>desktop.ini</code> and restores the standard yellow icon.</li>
@@ -483,10 +505,10 @@
     </ul>
   </div>
 
-  <h2>Uninstall</h2>
+  <h2 id="uninstall">Uninstall</h2>
   <div class="card">
     <pre>powershell -ExecutionPolicy Bypass -File "%LOCALAPPDATA%\Programs\FolderColors\ps1\Uninstall-FolderColors.ps1"</pre>
-    Removes all menu keys and the installed folder. Folders you already colored keep their desktop.ini until you reset them — run <b>Reset Folder Color</b> before uninstalling if you want them clean.
+    <span class="uninstall-copy">Removes all menu keys and the installed folder. Folders you already colored keep their desktop.ini until you reset them — run <b>Reset Folder Color</b> before uninstalling if you want them clean.</span>
   </div>
 
   <h2 id="troubleshooting">Troubleshooting (quick view)</h2>
@@ -519,8 +541,12 @@
 <script>
 (function(){
   var btn = document.getElementById("theme-toggle");
+  var languageBtn = document.getElementById("language-toggle");
   var meta = document.querySelector('meta[name="theme-color"]');
+  var root = document.documentElement;
+  var original = new Map();
   function current(){ return document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light"; }
+  function language(){ return root.getAttribute("lang") === "ar" ? "ar" : "en"; }
   function paint(){
     var dark = current() === "dark";
     btn.textContent = dark ? "\u2600\uFE0F Light" : "\u263D Dark";
@@ -533,6 +559,134 @@
     paint();
   });
   paint();
+
+  var translations = {
+    "nav.site a": [
+      "التنزيل", "ما الذي تحصل عليه", "الإعداد خلال دقيقتين", "كيف يعمل", "مقارنة", "الأسئلة الشائعة", "استكشاف الأخطاء"
+    ],
+    "h1": [
+      "ألوان مجلدات Windows 11 — <span class=\"accent\">غيّر أيقونات المجلدات من قائمة النقر بزر الفأرة الأيمن</span>"
+    ],
+    ".tagline": [
+      "انقر بزر الفأرة الأيمن على أي مجلد ← <b>Set Folder Color (1/2)</b> أو <b>(2/2)</b> ← اختر أحد الأيقونات العشرين، أو <b>Reset Folder Color</b>. يعمل بالكامل في الخلفية — بلا نوافذ طرفية أو نوافذ منبثقة أو واجهة تثبيت."
+    ],
+    ".badge": ["✓ تثبيت لكل مستخدم", "✓ لا تحتاج إلى صلاحيات المسؤول", "✓ لا تغيّر سياسة التنفيذ", "✓ يعمل دون اتصال"],
+    "#download .btn": ["⬇ تنزيل FolderColors-v3.2.zip"],
+    "#download .meta": ["أحدث إصدار · v3.2 · 341 KB · يُستخرج إلى <b>FolderColors\\</b> · التثبيت = نقرة مزدوجة واحدة · <a href=\"https://github.com/nazsa13/Windows11-Folder-Colors/releases/tag/v3.2\" rel=\"noopener\">ملاحظات الإصدار</a>"],
+    ".answer-first": ["لا يحتوي Windows 11 على ألوان للمجلدات افتراضيًا، لذا يتطلب تلوين المجلد توجيهه إلى ملفات أيقونات ملوّنة. <b>Folder Colors</b> ينفّذ ذلك نيابةً عنك: اختر أي مجلد، وانقر بزر الفأرة الأيمن، ثم اختر لونًا من <i>Set Folder Color</i> — عشرة ألوان في كل قائمة فرعية، وعشرون لونًا إجمالًا. يُعاد كتابة <code>desktop.ini</code> للمجلد فورًا، ويعيد <i>Reset Folder Color</i> المجلد الأصفر، وكل ذلك مجاني ولكل مستخدم وحجمه 341 KB."],
+    ".stat span": ["لونًا للمجلدات", "زمن تطبيق اللون", "صلاحيات مسؤول مطلوبة", "حجم التنزيل", "يعمل دون اتصال بعد التثبيت"],
+    "#what-you-get": ["ما الذي تحصل عليه"],
+    "#setup": ["الإعداد خلال دقيقتين"],
+    "#how-it-works": ["كيف يعمل"],
+    "#comparison": ["المقارنة"],
+    "#faq": ["الأسئلة الشائعة"],
+    "#troubleshooting": ["استكشاف الأخطاء وإصلاحها (عرض سريع)"],
+    ".figcap": [
+      "قائمة النقر بزر الفأرة الأيمن الحقيقية: <b>ثلاثة عناصر</b>، وكل قائمة فرعية تحتوي بالضبط على <b>عشرة</b> ألوان بترتيب التدرج — <i>الرمادي الداكن ← الأخضر</i> يسارًا، و<i>النعناعي ← الماروني</i> يمينًا.",
+      "مكتبة الأيقونات <code>Windows_11_coloured_icons.icl</code> المضمّنة — واضحة في كل أحجام مستكشف الملفات من 16px إلى 256px.<br>مكتبة الأيقونات <code>.icl</code> <b>ليست</b> من صنع هذا المشروع: الأيقونات الأصلية من <a href=\"https://www.deviantart.com/abs96/art/Windows-11-coloured-folder-icons-896431403\" rel=\"noopener noreferrer\" target=\"_blank\">abs96 على DeviantArt</a>."
+    ],
+    ".chip": ["رمادي داكن", "رمادي", "أبيض", "أحمر", "بني", "برتقالي", "أصفر", "ليموني", "زيتي", "أخضر", "نعناعي", "تركوازي", "أزرق فاتح", "أزرق", "كحلي", "أزرق فضائي", "أزرق متسابق", "بنفسجي", "زهري", "ماروني"],
+    ".step b": ["التنزيل والاستخراج", "النقر المزدوج على <code>install.cmd</code>", "انقر بزر الفأرة الأيمن على مجلد ← Set Folder Color (1/2) أو (2/2) ← اختر لونًا."],
+    ".step": [
+      "<span class=\"step-num\">1</span><div><b>التنزيل والاستخراج</b> فك ضغط الملف في أي مكان محلي — مثل <code>C:\\Tools\\FolderColors\\</code>. يمكنك حذف المجلد المستخرج أو نقله لاحقًا (راجع التحذير أدناه).</div>",
+      "<span class=\"step-num\">2</span><div><b>انقر مرتين على <code>install.cmd</code></b> داخل مجلد <code>FolderColors\\</code> المستخرج. تعرض وحدة التحكم التقدم وتتوقف في النهاية. لا تظهر مطالبة مسؤول — يتم التثبيت لكل مستخدم في <code>%LOCALAPPDATA%\\Programs\\FolderColors</code> وتُسجّل القائمة فورًا.</div>",
+      "<span class=\"step-num\">3</span><div><b>انقر بزر الفأرة الأيمن على مجلد ← Set Folder Color (1/2) أو (2/2) ← اختر لونًا.</b> يوجد عشرة ألوان في كل قائمة فرعية، ويظهر <b>Reset Folder Color</b> بجانبها. إذا لم تظهر العناصر عند النقر الأول، أعد تشغيل مستكشف الملفات مرة واحدة (Task Manager → Windows Explorer → Restart).</div>"
+    ],
+    ".gallery-details > ul > li": [
+      "<b>الألوان العشرون، مقسمة 10 + 10:</b> <i>Set Folder Color (1/2): Dark to Green</i> و<i>Set Folder Color (2/2): Mint to Maroon</i> — يعرض كل عنصر أيقونة المجلد الملوّنة الحقيقية داخل القائمة. يحد Windows القائمة المتفرعة الثابتة بـ16 عنصرًا، لذا فإن القائمتين الفرعيتين هما الطريقة الوحيدة لإظهار الألوان العشرين.",
+      "<b>Reset Folder Color</b> عنصر مستقل في المستوى الأعلى: نقرة واحدة تحذف <code>desktop.ini</code> للمجلد وتعيد الأيقونة الصفراء القياسية.",
+      "يوجد كل شيء في <b>قائمة النقر بزر الفأرة الأيمن الكاملة الكلاسيكية</b> من النقرة الأولى — يفعّل المثبّت تبديل القائمة الكلاسيكية نيابةً عنك.",
+      "لا تستطيع قائمة النقر المختصرة في Windows 11 استضافة عناصر قائمة التسجيل — وهذا <a href=\"https://learn.microsoft.com/en-us/windows/apps/desktop/modernize/desktop-6/modernize-keyboard-interactions#new-registration--iuiexecutioncommand\" rel=\"noopener noreferrer\" target=\"_blank\">قيد موثّق في Windows</a> وليس مشكلة في الأداة.",
+      "تُطبّق الألوان فورًا: تكتب الأداة <code>desktop.ini</code> للمجلد (وهي <a href=\"https://learn.microsoft.com/en-us/windows/win32/shell/how-to-assign-a-custom-icon-to-a-folder\" rel=\"noopener noreferrer\" target=\"_blank\">آلية Windows الموثّقة</a> لأيقونات المجلدات المخصصة) خلال أقل من ثانية؛ ويحدّث مستكشف الملفات الأيقونة بعد ثوانٍ قليلة."
+    ],
+    "#how-it-works + .card li": [
+      "<b>لا تظهر نافذة طرفية:</b> يشير التسجيل إلى ملف exe أصلي صغير يشغّل PowerShell مع تعطيل إنشاء النافذة — لا يظهر أي شيء.",
+      "<b>لا rundll32:</b> كانت الإصدارات القديمة تعرض خطأ shell32.dll؛ تستدعي جميع مسارات الإشعار الآن واجهة <a href=\"https://learn.microsoft.com/en-us/windows/win32/api/shlobj_core/nf-shlobj_core-shchangenotify\" rel=\"noopener noreferrer\" target=\"_blank\">SHChangeNotify</a> مباشرة.",
+      "<b>كل شيء قابل للوصول:</b> يحذف Windows بصمت العناصر التي تتجاوز العنصر 16 في القائمة المتفرعة، لذلك تُشحن الألوان في قائمتين فرعيتين من عشرة ألوان.",
+      "<b>إصلاح ذاتي:</b> يعيد كل تشغيل للتثبيت ربط المجلدات الملوّنة التي تعطلت مسارات أيقوناتها بعد النقل أو المزامنة."
+    ],
+    "#comparison + .card th, #comparison + .card td": [
+      "", "Folder Colors (هذه الأداة)", "Folder Colorizer 2", "FolderHue", "يدوي (تغيير الأيقونة)",
+      "السعر", "مجاني ومفتوح المصدر", "مجاني جزئيًا", "مجاني جزئيًا", "مجاني",
+      "الألوان المضمّنة", "20", "~11 مجانًا", "24 حسب المتجر", "0 (ابحث عن أيقوناتك)",
+      "التطبيق", "قائمة النقر بزر الفأرة الأيمن", "نافذة تطبيق", "قائمة النقر بزر الفأرة الأيمن", "مربع خصائص، 4 نقرات",
+      "صلاحيات المسؤول", "لا", "نعم", "لا", "لا",
+      "دون اتصال / قياس الاستخدام", "يعمل دون اتصال بالكامل", "يتحقق من الخادم", "تطبيق من Microsoft Store", "يعمل دون اتصال بالكامل",
+      "الإصلاح بعد النقل", "تلقائي", "—", "—", "—"
+    ],
+    ".faq-q": [
+      "كيف أغيّر لون المجلدات في Windows 11؟",
+      "ما أفضل برنامج مجاني لتغيير ألوان المجلدات؟",
+      "لماذا قُسّمت الألوان إلى قائمتين فرعيتين؟",
+      "هل يمكنني تغيير لون المجلد في Windows 11 دون برامج؟",
+      "لماذا لا يظهر عنصر Set Folder Color في قائمة النقر بزر الفأرة الأيمن؟",
+      "هل يتطلب تغيير ألوان المجلدات صلاحيات المسؤول؟",
+      "هل من الآمن تلوين المجلدات باستخدام desktop.ini؟",
+      "لماذا توقف لون المجلد عن العمل بعد نقله؟"
+    ],
+    ".faq-q + p": [
+      "أزال Windows 11 خيارات الألوان الموجودة في Windows 10، لذلك تحتاج إلى ملفات أيقونات ملوّنة. يثبّت Folder Colors عشرين أيقونة في قائمتين فرعيتين من عشرة: انقر بزر الفأرة الأيمن على مجلد واختر لونًا، ثم يُعاد كتابة <code>desktop.ini</code> خلال أقل من ثانية. يستغرق التثبيت نحو دقيقتين ولا يحتاج إلى صلاحيات المسؤول.",
+      "Folder Colors مجاني ومفتوح المصدر، حجمه 341 KB، ويُثبّت لكل مستخدم دون صلاحيات المسؤول، ويعرض عشرين لونًا في قائمتين فرعيتين — دون نافذة تطبيق منفصلة. البدائل مثل Folder Colorizer وFolderHue مجانية جزئيًا وتعتمد على المتجر.",
+      "يحد Windows القائمة المتفرعة الثابتة المعتمدة على التسجيل بـ <b>16 عنصرًا</b>: إذا وضعت 21 عنصرًا في قائمة واحدة فلن تظهر العناصر الخمسة الأخيرة. لذلك يوفّر Folder Colors قائمتين من عشرة ألوان — <i>Set Folder Color (1/2): Dark to Green</i> و<i>Set Folder Color (2/2): Mint to Maroon</i> — إضافة إلى <i>Reset Folder Color</i> مستقل.",
+      "نعم، يدويًا: انقر بزر الفأرة الأيمن على المجلد ← Properties ← Customize ← Change Icon، ثم اختر ملف <code>.ico</code> ملوّنًا. لكن Windows 11 لا يأتي بأيقونات مجلدات ملوّنة، لذلك عليك العثور عليها أو إنشاؤها. Folder Colors يؤتمت العملية نفسها باستخدام 20 أيقونة جاهزة.",
+      "لا تستطيع قائمة Windows 11 المختصرة استضافة عناصر قائمة التسجيل — وهذا قيد في Windows. يفعّل المثبّت القائمة الكلاسيكية التي تعرض العنصر من النقرة الأولى. بدون ذلك، ستجد العناصر تحت <i>Show more options</i>، وقد تحتاج إلى إعادة تشغيل مستكشف الملفات بعد التثبيت الأول.",
+      "لا. يعدّل Folder Colors مفاتيح HKEY_CURRENT_USER فقط ويكتب إلى %LOCALAPPDATA%، لذا يعمل كل شيء لكل مستخدم. يخزّن Windows أيقونات المجلدات المخصصة عبر desktop.ini، ولا تتطلب كتابة هذا الملف سوى صلاحية الكتابة إلى المجلد.",
+      "نعم. أيقونات المجلدات المخصصة عبر desktop.ini IconResource آلية موثّقة في Windows. لا يلمس Folder Colors ملفات النظام أو السجل العام أو DLL injection. إلغاء التثبيت أمر واحد ويعيد المجلد الأصفر الافتراضي.",
+      "يخزّن <code>desktop.ini</code> مسارًا مطلقًا إلى مكتبة الأيقونات. إذا نُقلت المكتبة المثبّتة أو تمت مزامنتها عبر OneDrive، تتعطل الأيقونات. أعد تشغيل المثبّت أو شغّل <code>Repair-FolderColors.ps1 -Apply</code> لإعادة ربط كل المسارات المعطلة تلقائيًا."
+    ],
+    "#uninstall": ["إلغاء التثبيت"],
+    ".uninstall-copy": ["يحذف جميع مفاتيح القائمة والمجلد المثبّت. تحتفظ المجلدات التي لوّنتها مسبقًا بملف desktop.ini إلى أن تعيد ضبطها — شغّل <b>Reset Folder Color</b> قبل إلغاء التثبيت إذا أردت تنظيفها."],
+    "main > h2:not([id]) + .card li": [
+      "<b>السجلات:</b> يكتب كل إجراء سطرًا في <code>%LOCALAPPDATA%\\Programs\\FolderColors\\app\\Logs\\menu-action-&lt;date&gt;.log</code>. ظهور السطور يعني أن المشغّل يعمل.",
+      "<b>desktop.ini:</b> يعرض <code>Get-Item \"&lt;colored folder&gt;\\desktop.ini\" -Force</code> مسار الأيقونة.",
+      "<b>التوقيت:</b> يُطبّق اللون فورًا، لكن قد يعرضه مستكشف الملفات بعد بضع ثوانٍ. اضغط F5 أو أعد تشغيل المستكشف لتحديثه فورًا."
+    ],
+    "#troubleshooting + .card th, #troubleshooting + .card td": [
+      "العَرَض", "الإصلاح",
+      "القائمة مفقودة بالكامل", "أعد تشغيل مستكشف الملفات؛ ثم شغّل <code>install.cmd</code> مجددًا.",
+      "يظهر العنصر فقط تحت “Show more options”", "لم تُفعّل القائمة الكلاسيكية — أعد التثبيت (<code>install.cmd</code> يفعّلها) أو أعدها يدويًا.",
+      "تظهر نحو 16 لونًا فقط في قائمة واحدة", "إصدار v3.1 القديم: تصل قائمة واحدة من 21 عنصرًا إلى حد Windows البالغ 16. أعد تثبيت v3.2 — الألوان الآن في قائمتين من عشرة.",
+      "لا يظهر اللون", "انتظر بضع ثوانٍ أو اضغط F5 أو أعد تشغيل المستكشف. إذا لم يظهر، تحقق من وجود المكتبة في مسار التثبيت وراجع السجل.",
+      "نافذة “Error in shell32.dll / Missing entry” المنبثقة", "أنت تستخدم نسخة قديمة. احذفها وأعد التثبيت — الإصدار الحالي لا يستخدم rundll32.",
+      "يحجر برنامج مكافحة الفيروسات <code>FolderColors.exe</code>", "إنذار كاذب بسبب ملف exe غير موقّع ومبني ذاتيًا. أضف استثناءً للمسار <code>%LOCALAPPDATA%\\Programs\\FolderColors</code> واستعد الملف."
+    ],
+    ".warn": ["<b>⚠ اقرأ هذا مرة واحدة قبل نقل الملفات.</b><br>يخزّن <code>desktop.ini</code> لكل مجلد ملوّن <b>مسارًا مطلقًا</b> إلى مكتبة الأيقونات. يجب عدم نقل المكتبة المثبّتة (<code>%LOCALAPPDATA%\\Programs\\FolderColors</code>) أو مزامنتها. مجلد التنزيل المستخرج مجرد نسخة مؤقتة — نقله أو حذفه بعد التثبيت آمن، لأن النسخة المثبّتة هي التي تعمل فعليًا. إذا تعطلت الأيقونات، شغّل <code>Repair-FolderColors.ps1 -Apply</code> أو أعد تشغيل المثبّت؛ فهو يصلح المسارات المعطلة تلقائيًا."],
+    "footer": ["Folder Colors v3.2 · مجاني ومفتوح المصدر · <a href=\"https://github.com/nazsa13/Windows11-Folder-Colors\" rel=\"noopener noreferrer\">الكود المصدري على GitHub</a> · <a href=\"https://github.com/nazsa13/Windows11-Folder-Colors/releases\" rel=\"noopener noreferrer\">كل الإصدارات</a>.<br>ملاحظة: قد تؤخر ذاكرة أيقونات مستكشف الملفات تغييرات اللون بضع ثوانٍ — لكن اللون نفسه يُكتب فورًا.<br>الاعتمادات: مكتبة أيقونات المجلد <code>.icl</code> <b>ليست</b> من صنع مؤلف المشروع — الأيقونات الأصلية من <a href=\"https://www.deviantart.com/abs96/art/Windows-11-coloured-folder-icons-896431403\" rel=\"noopener noreferrer\">abs96 على DeviantArt</a>."]
+  };
+
+  function translate(selector, values) {
+    var elements = document.querySelectorAll(selector);
+    elements.forEach(function(el, index) {
+      if (!original.has(el)) { original.set(el, el.innerHTML); }
+      if (language() === "ar" && values[index] !== undefined) { el.innerHTML = values[index]; }
+      else if (language() === "en" && original.has(el)) { el.innerHTML = original.get(el); }
+    });
+  }
+
+  function applyLanguage() {
+    var ar = language() === "ar";
+    root.lang = ar ? "ar" : "en";
+    root.dir = ar ? "rtl" : "ltr";
+    document.title = ar ? "ألوان مجلدات Windows 11 — أيقونات مجلدات مجانية" : "Folder Colors for Windows 11 — Free Right-Click Folder Icons";
+    languageBtn.textContent = ar ? "English" : "العربية";
+    languageBtn.setAttribute("aria-label", ar ? "Switch to English" : "Switch to Arabic");
+    languageBtn.title = ar ? "Switch to English" : "Switch to Arabic";
+    Object.keys(translations).forEach(function(selector) {
+      translate(selector, translations[selector]);
+    });
+  }
+
+  languageBtn.addEventListener("click", function(){
+    var next = language() === "ar" ? "en" : "ar";
+    root.setAttribute("lang", next);
+    try { localStorage.setItem("fc-lang", next); } catch (e) {}
+    applyLanguage();
+  });
+  try {
+    var savedLanguage = localStorage.getItem("fc-lang");
+    if (savedLanguage === "ar") { root.setAttribute("lang", "ar"); }
+  } catch (e) {}
+  applyLanguage();
 })();
 </script>
 
