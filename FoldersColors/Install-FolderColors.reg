@@ -11,139 +11,148 @@ Windows Registry Editor Version 5.00
 ;   MIconPath   -> full path to MenuIcon.ico
 ;
 ; Layout notes:
-;   FolderColorMenu   = classic cascading submenu with all colors + Reset.
-;   (The old one-click GUI picker entry, FolderColorPicker, was removed on purpose.)
+;   Windows caps a static cascading submenu at 16 items, so the 20 colors are
+;   split into TWO submenus of 10 (FolderColorMenu1 / FolderColorMenu2) and
+;   Reset is its own top-level command (FolderColorReset).
 ;   Uses nested shell subkeys only (no Explorer CommandStore), which works per-user.
 
-[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu]
-"MUIVerb"="Set Folder Color"
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu1]
+"MUIVerb"="Set Folder Color (1/2): Dark to Green"
 "Icon"="MIconPath"
 ; Must stay EMPTY: a non-empty SubCommands list makes Explorer resolve verbs
 ; from Explorer\CommandStore (not used here) and yields an empty flyout.
 "SubCommands"=""
 
-[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu\shell\DarkGrey]
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu1\shell\01-DarkGrey]
 @="Dark Grey"
 "Icon"="iclPath,0"
-[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu\shell\DarkGrey\command]
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu1\shell\01-DarkGrey\command]
 @="powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"ps1Path\" -Folder \"%1\" -IconIndex 0 -IconPath \"iclPath\""
 
-[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu\shell\Grey]
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu1\shell\02-Grey]
 @="Grey"
 "Icon"="iclPath,1"
-[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu\shell\Grey\command]
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu1\shell\02-Grey\command]
 @="powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"ps1Path\" -Folder \"%1\" -IconIndex 1 -IconPath \"iclPath\""
 
-[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu\shell\White]
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu1\shell\03-White]
 @="White"
 "Icon"="iclPath,2"
-[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu\shell\White\command]
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu1\shell\03-White\command]
 @="powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"ps1Path\" -Folder \"%1\" -IconIndex 2 -IconPath \"iclPath\""
 
-[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu\shell\Red]
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu1\shell\04-Red]
 @="Red"
 "Icon"="iclPath,3"
-[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu\shell\Red\command]
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu1\shell\04-Red\command]
 @="powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"ps1Path\" -Folder \"%1\" -IconIndex 3 -IconPath \"iclPath\""
 
-[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu\shell\Brown]
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu1\shell\05-Brown]
 @="Brown"
 "Icon"="iclPath,4"
-[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu\shell\Brown\command]
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu1\shell\05-Brown\command]
 @="powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"ps1Path\" -Folder \"%1\" -IconIndex 4 -IconPath \"iclPath\""
 
-[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu\shell\Orange]
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu1\shell\06-Orange]
 @="Orange"
 "Icon"="iclPath,5"
-[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu\shell\Orange\command]
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu1\shell\06-Orange\command]
 @="powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"ps1Path\" -Folder \"%1\" -IconIndex 5 -IconPath \"iclPath\""
 
-[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu\shell\Yellow]
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu1\shell\07-Yellow]
 @="Yellow"
 "Icon"="iclPath,6"
-[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu\shell\Yellow\command]
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu1\shell\07-Yellow\command]
 @="powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"ps1Path\" -Folder \"%1\" -IconIndex 6 -IconPath \"iclPath\""
 
-[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu\shell\Lime]
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu1\shell\08-Lime]
 @="Lime"
 "Icon"="iclPath,7"
-[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu\shell\Lime\command]
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu1\shell\08-Lime\command]
 @="powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"ps1Path\" -Folder \"%1\" -IconIndex 7 -IconPath \"iclPath\""
 
-[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu\shell\Olive]
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu1\shell\09-Olive]
 @="Olive"
 "Icon"="iclPath,8"
-[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu\shell\Olive\command]
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu1\shell\09-Olive\command]
 @="powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"ps1Path\" -Folder \"%1\" -IconIndex 8 -IconPath \"iclPath\""
 
-[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu\shell\Green]
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu1\shell\10-Green]
 @="Green"
 "Icon"="iclPath,9"
-[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu\shell\Green\command]
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu1\shell\10-Green\command]
 @="powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"ps1Path\" -Folder \"%1\" -IconIndex 9 -IconPath \"iclPath\""
 
-[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu\shell\Mint]
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu2]
+"MUIVerb"="Set Folder Color (2/2): Mint to Maroon"
+"Icon"="MIconPath"
+; Must stay EMPTY: a non-empty SubCommands list makes Explorer resolve verbs
+; from Explorer\CommandStore (not used here) and yields an empty flyout.
+"SubCommands"=""
+
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu2\shell\11-Mint]
 @="Mint"
 "Icon"="iclPath,10"
-[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu\shell\Mint\command]
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu2\shell\11-Mint\command]
 @="powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"ps1Path\" -Folder \"%1\" -IconIndex 10 -IconPath \"iclPath\""
 
-[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu\shell\Teal]
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu2\shell\12-Teal]
 @="Teal"
 "Icon"="iclPath,11"
-[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu\shell\Teal\command]
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu2\shell\12-Teal\command]
 @="powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"ps1Path\" -Folder \"%1\" -IconIndex 11 -IconPath \"iclPath\""
 
-[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu\shell\LightBlue]
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu2\shell\13-LightBlue]
 @="Light Blue"
 "Icon"="iclPath,12"
-[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu\shell\LightBlue\command]
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu2\shell\13-LightBlue\command]
 @="powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"ps1Path\" -Folder \"%1\" -IconIndex 12 -IconPath \"iclPath\""
 
-[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu\shell\Blue]
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu2\shell\14-Blue]
 @="Blue"
 "Icon"="iclPath,13"
-[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu\shell\Blue\command]
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu2\shell\14-Blue\command]
 @="powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"ps1Path\" -Folder \"%1\" -IconIndex 13 -IconPath \"iclPath\""
 
-[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu\shell\Navy]
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu2\shell\15-Navy]
 @="Navy"
 "Icon"="iclPath,14"
-[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu\shell\Navy\command]
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu2\shell\15-Navy\command]
 @="powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"ps1Path\" -Folder \"%1\" -IconIndex 14 -IconPath \"iclPath\""
 
-[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu\shell\SpaceBlue]
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu2\shell\16-SpaceBlue]
 @="Space Blue"
 "Icon"="iclPath,15"
-[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu\shell\SpaceBlue\command]
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu2\shell\16-SpaceBlue\command]
 @="powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"ps1Path\" -Folder \"%1\" -IconIndex 15 -IconPath \"iclPath\""
 
-[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu\shell\RacerBlue]
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu2\shell\17-RacerBlue]
 @="Racer Blue"
 "Icon"="iclPath,16"
-[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu\shell\RacerBlue\command]
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu2\shell\17-RacerBlue\command]
 @="powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"ps1Path\" -Folder \"%1\" -IconIndex 16 -IconPath \"iclPath\""
 
-[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu\shell\Purple]
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu2\shell\18-Purple]
 @="Purple"
 "Icon"="iclPath,17"
-[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu\shell\Purple\command]
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu2\shell\18-Purple\command]
 @="powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"ps1Path\" -Folder \"%1\" -IconIndex 17 -IconPath \"iclPath\""
 
-[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu\shell\Pink]
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu2\shell\19-Pink]
 @="Pink"
 "Icon"="iclPath,18"
-[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu\shell\Pink\command]
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu2\shell\19-Pink\command]
 @="powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"ps1Path\" -Folder \"%1\" -IconIndex 18 -IconPath \"iclPath\""
 
-[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu\shell\Maroon]
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu2\shell\20-Maroon]
 @="Maroon"
 "Icon"="iclPath,19"
-[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu\shell\Maroon\command]
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu2\shell\20-Maroon\command]
 @="powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"ps1Path\" -Folder \"%1\" -IconIndex 19 -IconPath \"iclPath\""
 
-[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu\shell\Reset]
-@="Reset to Default"
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorReset]
+"MUIVerb"="Reset Folder Color"
 "Icon"="shell32.dll,240"
-[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorMenu\shell\Reset\command]
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\FolderColorReset\command]
 @="powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"resetPs1Path\" -Folder \"%1\""
+

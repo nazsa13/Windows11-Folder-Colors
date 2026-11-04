@@ -89,27 +89,30 @@ if (Test-Path -LiteralPath $oldStableDir -PathType Container) {
 # ------------------------------------------------------------------
 $parentBase = "Registry::HKEY_CURRENT_USER\Software\Classes\Directory\shell"
 
+# Child key names carry a numeric prefix (01-..20-) so Explorer lists the colors
+# in icon-library order (dark grey -> green -> mint -> maroon) instead of
+# alphabetically. MUIVerb is what the user reads; the key name only sorts.
 $colors = @(
-    @{ Id = "DarkGrey"; Name = "Dark Grey"; Index = 0 },
-    @{ Id = "Grey"; Name = "Grey"; Index = 1 },
-    @{ Id = "White"; Name = "White"; Index = 2 },
-    @{ Id = "Red"; Name = "Red"; Index = 3 },
-    @{ Id = "Brown"; Name = "Brown"; Index = 4 },
-    @{ Id = "Orange"; Name = "Orange"; Index = 5 },
-    @{ Id = "Yellow"; Name = "Yellow"; Index = 6 },
-    @{ Id = "Lime"; Name = "Lime"; Index = 7 },
-    @{ Id = "Olive"; Name = "Olive"; Index = 8 },
-    @{ Id = "Green"; Name = "Green"; Index = 9 },
-    @{ Id = "Mint"; Name = "Mint"; Index = 10 },
-    @{ Id = "Teal"; Name = "Teal"; Index = 11 },
-    @{ Id = "LightBlue"; Name = "Light Blue"; Index = 12 },
-    @{ Id = "Blue"; Name = "Blue"; Index = 13 },
-    @{ Id = "Navy"; Name = "Navy"; Index = 14 },
-    @{ Id = "SpaceBlue"; Name = "Space Blue"; Index = 15 },
-    @{ Id = "RacerBlue"; Name = "Racer Blue"; Index = 16 },
-    @{ Id = "Purple"; Name = "Purple"; Index = 17 },
-    @{ Id = "Pink"; Name = "Pink"; Index = 18 },
-    @{ Id = "Maroon"; Name = "Maroon"; Index = 19 }
+    @{ Key = "01-DarkGrey";  Name = "Dark Grey";  Index = 0 },
+    @{ Key = "02-Grey";      Name = "Grey";       Index = 1 },
+    @{ Key = "03-White";     Name = "White";      Index = 2 },
+    @{ Key = "04-Red";       Name = "Red";        Index = 3 },
+    @{ Key = "05-Brown";     Name = "Brown";      Index = 4 },
+    @{ Key = "06-Orange";    Name = "Orange";     Index = 5 },
+    @{ Key = "07-Yellow";    Name = "Yellow";     Index = 6 },
+    @{ Key = "08-Lime";      Name = "Lime";       Index = 7 },
+    @{ Key = "09-Olive";     Name = "Olive";      Index = 8 },
+    @{ Key = "10-Green";     Name = "Green";      Index = 9 },
+    @{ Key = "11-Mint";      Name = "Mint";       Index = 10 },
+    @{ Key = "12-Teal";      Name = "Teal";       Index = 11 },
+    @{ Key = "13-LightBlue"; Name = "Light Blue"; Index = 12 },
+    @{ Key = "14-Blue";      Name = "Blue";       Index = 13 },
+    @{ Key = "15-Navy";      Name = "Navy";       Index = 14 },
+    @{ Key = "16-SpaceBlue"; Name = "Space Blue"; Index = 15 },
+    @{ Key = "17-RacerBlue"; Name = "Racer Blue"; Index = 16 },
+    @{ Key = "18-Purple";    Name = "Purple";     Index = 17 },
+    @{ Key = "19-Pink";      Name = "Pink";       Index = 18 },
+    @{ Key = "20-Maroon";    Name = "Maroon";     Index = 19 }
 )
 
 function Set-RegistryStringValue {
@@ -135,12 +138,14 @@ function Set-RegistryDefaultValue {
     Set-Item -LiteralPath $Path -Value $Value -Force
 }
 
-# Remove keys from older versions of this installer (the direct GUI picker
-# entry was removed; delete any stale copy of it too).
-foreach ($legacy in @("FolderColorPicker", "FolderColor1", "FolderColor2")) {
+# Remove keys from older versions of this installer: the single 21-item
+# submenu (FolderColorMenu), the old direct GUI picker entry and the two
+# pre-submenu flat lists.
+foreach ($legacy in @("FolderColorMenu", "FolderColorPicker", "FolderColor1", "FolderColor2")) {
     $legacyPath = Join-Path $parentBase $legacy
     if (Test-Path -LiteralPath $legacyPath) {
         Remove-Item -LiteralPath $legacyPath -Recurse -Force
+        Write-Host "Removed legacy menu key: $legacy"
     }
 }
 
@@ -155,39 +160,50 @@ if ($usingRunner) {
     $resetCommand = "powershell.exe -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File `"$runnerScript`" -Mode reset -Folder `"%1`""
 }
 
-# Single entry: classic cascading submenu with all colors + Reset (arrow +
-# flyout under "Show more options" on Windows 11; full menu when the classic
-# menu is enabled). SubCommands stays EMPTY: a non-empty list makes Explorer
-# resolve verbs from Explorer\CommandStore (unused here) and yields an empty flyout.
-$menuPath = Join-Path $parentBase "FolderColorMenu"
-Set-RegistryStringValue -Path $menuPath -Name "MUIVerb" -Value "Set Folder Color"
-Set-RegistryStringValue -Path $menuPath -Name "Icon" -Value $menuIconPath
-Set-RegistryStringValue -Path $menuPath -Name "SubCommands" -Value ""
+# Windows hard-caps a static cascading submenu at 16 items per group, so a
+# single 21-item flyout silently loses its last 5 entries. Colors therefore
+# ship as TWO submenus of 10 (hue order) plus a separate top-level Reset entry.
+# Key names sort Menu1 < Menu2 < Reset; MUIVerb is the visible label.
+$menuGroups = @(
+    @{ Key = "FolderColorMenu1"; Verb = "Set Folder Color (1/2): Dark to Green"; Colors = $colors[0..9] },
+    @{ Key = "FolderColorMenu2"; Verb = "Set Folder Color (2/2): Mint to Maroon"; Colors = $colors[10..19] }
+)
 
-# Remove color children that the menu no longer ships (older installs may have
-# registered entries this version dropped).
-$keepIds = @(($colors | ForEach-Object { $_.Id }) + "Reset")
-$menuShellPath = Join-Path $menuPath "shell"
-if (Test-Path -LiteralPath $menuShellPath) {
-    foreach ($child in (Get-ChildItem -LiteralPath $menuShellPath)) {
-        if ($keepIds -notcontains $child.PSChildName) {
-            Remove-Item -LiteralPath $child.PSPath -Recurse -Force
-            Write-Host "Removed stale color entry: $($child.PSChildName)"
+# SubCommands stays EMPTY: a non-empty list makes Explorer resolve verbs from
+# Explorer\CommandStore (unused here) and yields an empty flyout.
+foreach ($group in $menuGroups) {
+    $menuPath = Join-Path $parentBase $group.Key
+    Set-RegistryStringValue -Path $menuPath -Name "MUIVerb" -Value $group.Verb
+    Set-RegistryStringValue -Path $menuPath -Name "Icon" -Value $menuIconPath
+    Set-RegistryStringValue -Path $menuPath -Name "SubCommands" -Value ""
+
+    # Remove children this version no longer ships (older key names, colors
+    # moved to the other submenu, ...).
+    $keepIds = @($group.Colors | ForEach-Object { $_.Key })
+    $menuShellPath = Join-Path $menuPath "shell"
+    if (Test-Path -LiteralPath $menuShellPath) {
+        foreach ($child in (Get-ChildItem -LiteralPath $menuShellPath)) {
+            if ($keepIds -notcontains $child.PSChildName) {
+                Remove-Item -LiteralPath $child.PSPath -Recurse -Force
+                Write-Host "Removed stale entry: $($group.Key)\$($child.PSChildName)"
+            }
         }
+    }
+
+    foreach ($color in $group.Colors) {
+        $itemPath = Join-Path (Join-Path $menuPath "shell") $color.Key
+        Set-RegistryStringValue -Path $itemPath -Name "MUIVerb" -Value $color.Name
+        Set-RegistryStringValue -Path $itemPath -Name "Icon" -Value "$iconLibraryPath,$($color.Index)"
+        $cmd = $colorCommandTpl -f $color.Index
+        if (-not $usingRunner) { $cmd = $cmd.Replace('"%1"', '"%1" ') }
+        Set-RegistryDefaultValue -Path (Join-Path $itemPath "command") -Value $cmd
     }
 }
 
-foreach ($color in $colors) {
-    $itemPath = Join-Path (Join-Path $menuPath "shell") $color.Id
-    Set-RegistryStringValue -Path $itemPath -Name "MUIVerb" -Value $color.Name
-    Set-RegistryStringValue -Path $itemPath -Name "Icon" -Value "$iconLibraryPath,$($color.Index)"
-    $cmd = $colorCommandTpl -f $color.Index
-    if (-not $usingRunner) { $cmd = $cmd.Replace('"%1"', '"%1" ') }
-    Set-RegistryDefaultValue -Path (Join-Path $itemPath "command") -Value $cmd
-}
-
-$resetItemPath = Join-Path (Join-Path $menuPath "shell") "Reset"
-Set-RegistryStringValue -Path $resetItemPath -Name "MUIVerb" -Value "Reset to Default"
+# Reset is its own top-level entry (a plain command, no flyout) so it is
+# reachable in one click and is not pushed out by the 16-item cap.
+$resetItemPath = Join-Path $parentBase "FolderColorReset"
+Set-RegistryStringValue -Path $resetItemPath -Name "MUIVerb" -Value "Reset Folder Color"
 Set-RegistryStringValue -Path $resetItemPath -Name "Icon" -Value "shell32.dll,240"
 Set-RegistryDefaultValue -Path (Join-Path $resetItemPath "command") -Value $resetCommand
 
@@ -228,7 +244,9 @@ if ($usingRunner) {
 } else {
     Write-Host "Note: launcher exes not found next to this script; menu uses hidden PowerShell windows."
 }
-Write-Host "  'Set Folder Color' - right-click submenu with all 20 colors + Reset to Default."
+Write-Host "  Menu entries: 'Set Folder Color (1/2): Dark to Green' (10 colors),"
+Write-Host "                'Set Folder Color (2/2): Mint to Maroon' (10 colors), and 'Reset Folder Color'."
+Write-Host "  Split into two submenus because Windows caps a static flyout at 16 items."
 if (-not $ClassicMenu) {
     Write-Host "Note: the Windows 11 compact menu cannot host registry verbs; entries appear under"
     Write-Host "'Show more options'. Re-run with -ClassicMenu to put them on the first right-click."
