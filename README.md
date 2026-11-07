@@ -1,6 +1,6 @@
 # Windows 11 Folder Colors
 
-**Made by [Mhd Nazir Sagherji · محمد نذير صاغرجي](https://nazir.sagherji.com).**
+**Made by [Mhd Nazir Sagherji](https://nazir.sagherji.com).**
 
 Adds **two `Set Folder Color` submenus** — 10 colors each, **20 colored folder icons** in total — plus a **`Reset Folder Color`** action to the right-click menu of any folder in Windows Explorer.
 
@@ -196,4 +196,4 @@ Uses the in-box `C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe` (C# 5)
 
 ## 11. Author
 
-Made by **Mhd Nazir Sagherji** — **محمد نذير صاغرجي** — [nazir.sagherji.com](https://nazir.sagherji.com).
+Made by **Mhd Nazir Sagherji** — [nazir.sagherji.com](https://nazir.sagherji.com).

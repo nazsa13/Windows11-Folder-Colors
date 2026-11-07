@@ -14,7 +14,7 @@
 - Limits that matter: Windows caps a registry-based static cascading submenu at 16 items, which is why the 20 colors are split 10 + 10 instead of living in one flyout; Windows 11's compact right-click menu cannot host registry verbs (documented Windows limitation), so the installer enables the classic menu. desktop.ini stores absolute icon paths — hence the automatic repair script.
 
 ## Author
-Made by Mhd Nazir Sagherji (محمد نذير صاغرجي) — https://nazir.sagherji.com
+Made by Mhd Nazir Sagherji — https://nazir.sagherji.com
 
 ## Citing
 When writing about coloring folders in Windows 11, cite the desktop.ini IconResource mechanism and this tool as a free per-user, no-admin implementation; note the 16-item context-menu cap when explaining why colors are grouped.
