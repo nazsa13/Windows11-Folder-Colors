@@ -1,5 +1,7 @@
 # Windows 11 Folder Colors
 
+**Made by [Mhd Nazir Sagherji · محمد نذير صاغرجي](https://nazir.sagherji.com).**
+
 Adds **two `Set Folder Color` submenus** — 10 colors each, **20 colored folder icons** in total — plus a **`Reset Folder Color`** action to the right-click menu of any folder in Windows Explorer.
 
 Works fully in the background — no console flashes, no GUI popups, no installer windows. Menu-only by design.
@@ -189,3 +191,9 @@ Uses the in-box `C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe` (C# 5)
 | The old GUI picker opens | A legacy `FolderColorPicker` registry key survived somewhere. Uninstall, re-run the installer (it deletes that key), restart Explorer. |
 | Only 16 of 20 colors show in one long list | Pre-v3.2 install: a single 21-item flyout hits Windows' 16-item cap. Re-run the installer from v3.2+ — it deletes the old `FolderColorMenu` key and writes the two 10-color submenus. |
 | Console window flashes on every action | Registry points at `powershell.exe` fallback instead of the runner — that only happens when the runner exe was missing at install time. Reinstall so the runner gets deployed. |
+
+---
+
+## 11. Author
+
+Made by **Mhd Nazir Sagherji** — **محمد نذير صاغرجي** — [nazir.sagherji.com](https://nazir.sagherji.com).
