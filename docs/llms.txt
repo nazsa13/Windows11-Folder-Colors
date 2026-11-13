@@ -3,7 +3,7 @@
 > Free, open-source Windows utility that adds two "Set Folder Color" submenus (10 colors each) plus a "Reset Folder Color" entry to the Windows 11 right-click menu, exposing 20 colored folder icons. Installs per-user (`%LOCALAPPDATA%`), needs no admin rights, works fully offline, applies a color in under one second, and repairs broken icon paths automatically when folders are moved. Current release: v3.2 (341 KB).
 
 ## Pages
-- [Home / download (v3.2)](https://windows11-folder-colors.vercel.app/): install guide, how it works under the hood, comparison with Folder Colorizer / FolderHue / manual Change Icon, FAQ, troubleshooting.
+- [Home / download (v3.2)](https://win11-fc.nazir.sagherji.com/): install guide, how it works under the hood, comparison with Folder Colorizer / FolderHue / manual Change Icon, FAQ, troubleshooting.
 - [Source code](https://github.com/nazsa13/Windows11-Folder-Colors): PowerShell scripts + native runner (C#), MIT-style license.
 - [Release v3.2](https://github.com/nazsa13/Windows11-Folder-Colors/releases/tag/v3.2): changelog and the direct download zip.
 

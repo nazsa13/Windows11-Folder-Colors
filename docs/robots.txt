@@ -33,4 +33,4 @@ Allow: /
 User-agent: Bingbot
 Allow: /
 
-Sitemap: https://windows11-folder-colors.vercel.app/sitemap.xml
+Sitemap: https://win11-fc.nazir.sagherji.com/sitemap.xml
